@@ -1,5 +1,7 @@
-last_reviewed: 2025-09-03
-stage: design
+| key | value |
+| --- | --- |
+| last_reviewed | 2025-09-03 |
+| stage | design |
 
 # Technical Context
 
