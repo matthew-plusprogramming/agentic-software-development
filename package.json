@@ -1,0 +1,11 @@
+{
+  "name": "ai-template",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "packageManager": "npm@11.5.2",
+  "type": "module",
+  "scripts": {
+    "memory:validate": "node agents/scripts/validate-memory-bank.mjs",
+    "memory:drift": "node agents/scripts/check-memory-drift.mjs"
+  }
+}
