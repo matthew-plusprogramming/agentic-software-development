@@ -15,6 +15,7 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
 - Read `AGENTS.md` for the repo‑native agent system overview.
 - Open `agents/workflows/default.workflow.md` and begin at the current phase.
 - Keep `agents/memory-bank/*` updated as you work (Reflexion notes after each phase).
+  - This happens automatically when using agentic tools such as Codex
 
 **Repository Layout**
 - `agents/memory-bank.md`: Memory Bank overview + stamped git SHA for drift checks.
@@ -62,6 +63,3 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
 - Validation failures: fix bad paths in memory files or update `PATH_PREFIXES`/`ROOT_BASENAMES` in `agents/scripts/constants.js`.
 - Drift failures: update `generated_at` and `repo_git_sha` in `agents/memory-bank.md` after reviewing canonical changes; rerun the check.
 - Git operations: prefer GitHub MCP or your standard tooling; workflows are tool‑agnostic.
-
-**License**
-- See `package.json` for license info.
