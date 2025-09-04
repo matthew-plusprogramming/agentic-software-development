@@ -1,8 +1,8 @@
-| key | value |
-| --- | --- |
-| memory_bank | v1 |
-| generated_at | 2025-09-03 |
-| repo_git_sha | 7c16b1ca1c98b652da436008ac74c9de902a1e31 |
+---
+memory_bank: v1
+generated_at: 2025-09-04
+repo_git_sha: 39fa7b6a9e8a1d06a87060b211fb02e453ece0e1
+---
 
 Memory Bank
 
