@@ -1,8 +1,10 @@
 Workflows
 
+It is very important you strictly follow the agent workflows.
+
 - Default workflow: `agents/workflows/default.workflow.md`
-- Purpose: drive multi-phase execution (planner → retriever → architect → implementer → reviewer → tester → documenter) with explicit inputs/outputs and gates.
- - New workflow template: `agents/workflows/templates/pattern.workflow.template.md`
+- Purpose: drive three-phase execution (plan → build → verify) with explicit inputs/outputs and gates.
+- New workflow template: `agents/workflows/templates/pattern.workflow.template.md`
 
 Usage
 - Open the workflow file and start at the current phase.
@@ -13,4 +15,4 @@ Usage
 Policies
 - Retrieval: always consult `project.brief.md`, recent `progress.log.md`, and `active.context.md`; include additional canonical files as needed for task type.
 - External tools: prefer GitHub MCP for git actions (branching, commits, PRs).
- - Workflow Synthesis: When a high-importance procedural pattern is recorded in `agents/memory-bank/system.patterns.md`, update an existing workflow or create a new one from the template. Declarative knowledge updates do not change workflows and should be captured in the Memory Bank only.
+- Workflow Synthesis: When a high-importance procedural pattern is recorded in `agents/memory-bank/system.patterns.md`, update an existing workflow or create a new one from the template. Declarative knowledge updates do not change workflows and should be captured in the Memory Bank only.
