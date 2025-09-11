@@ -8,7 +8,7 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
 
 **What You Get**
 - Memory Bank: tiered, structured markdown under `agents/memory-bank/**` with validation and drift checks.
-- Workflows: clear, diff‑able process files under `agents/workflows/**` (planner → retriever → architect → implementer → reviewer → tester → documenter).
+- Workflows: clear, diff‑able process files under `agents/workflows/**` (plan → build → verify).
 - Scripts: `npm run memory:validate` and `npm run memory:drift` to keep context correct and in sync with git.
 
 **Start Here**
@@ -45,8 +45,8 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
   - Retrieval Policy: always include `project.brief.md`, recent `progress.log.md`, and `active.context.md`; add `tech.context.md`, `system.patterns.md`, and ADRs as relevant.
   - Stamping: update `agents/memory-bank.md` front matter with `generated_at` and `repo_git_sha` when shipping a change touching canonicals.
 - Workflows (Explicit Phases)
-  - Phases: planner → retriever → architect → implementer → reviewer → tester → documenter.
-  - Synthesis: when a procedural pattern in `system.patterns.md` proves valuable, modify/create a workflow (template provided) in the Documenter phase. System‑impacting changes may warrant an ADR under `agents/memory-bank/decisions/`.
+  - Phases: plan → build → verify.
+  - Synthesis: when a procedural pattern in `system.patterns.md` proves valuable, modify/create a workflow (template provided). System‑impacting changes may warrant an ADR under `agents/memory-bank/decisions/`.
 
 **Adopt In An Existing Repo**
 - Copy `agents/` and `AGENTS.md` into your project root.
