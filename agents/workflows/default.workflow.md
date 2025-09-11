@@ -14,6 +14,8 @@ Global Prompts
 - Retrieval setup: Identify task type (bug|feature|refactor|ops). Always include `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`. Add more canonical files by relevance. For system-impacting changes, create an ADR stub PR.
 - Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`.
 - External tools: Use GitHub MCP for git operations.
+- Commit confirmation: Before each commit (including fixups), present the proposed Conventional Commit title (< 70 chars) and body, and ask for explicit approval. Do not commit without approval.
+- Markdown standards: When editing `.md` files, follow CommonMark. Use ATX headings (`#`), one space after `#`, a blank line before and after headings when appropriate, `- ` for lists, fenced code blocks with language tags, inline code in backticks, no trailing spaces, and a final newline.
 
 Phase: planner
 - Goal: Clarify scope, constraints, success metrics, and plan.
@@ -58,6 +60,7 @@ Phase: implementer
   - Implement code and docs surgically.
   - Keep unrelated changes out; follow repo style.
   - Update `agents/memory-bank` canonical files if required.
+  - With confirmation, create `codex/<slug>` branch. Before each commit, ask for approval with the proposed Conventional Commit title (< 70 chars) and body; then push to the remote branch when confirmed.
 - Outputs: Code changes; updated docs; migrations/scripts as needed.
 - Done_when: Changes compile and meet plan scope.
 - Gates: Lint/build pass locally.
@@ -70,6 +73,7 @@ Phase: reviewer
   - Self-review diff for clarity and minimalism.
   - Verify naming, comments, and docs.
   - Re-check invariants and contracts.
+  - Before committing review fixups, ask for commit approval with the proposed Conventional Commit title (< 70 chars) and body.
 - Outputs: Review notes; fixups.
 - Done_when: No blocking issues remain.
 - Gates: All comments addressed.
@@ -94,6 +98,7 @@ Phase: documenter
   - Update canonical files under `agents/memory-bank/` as needed.
   - Add/Update ADRs for accepted decisions.
   - Append Reflexion and progress log entries.
+  - Ensure Markdown changes follow CommonMark and repo style (headings, lists, code fences, inline code, final newline). Validate links and paths.
   - Workflow Synthesis: If `agents/memory-bank/system.patterns.md` contains new high-importance procedural patterns, then either:
     - Modify an existing workflow under `agents/workflows/*.workflow.md` (augment the relevant phase), or
     - Create a new workflow from `agents/workflows/templates/pattern.workflow.template.md` as `agents/workflows/<slug>.workflow.md`.
