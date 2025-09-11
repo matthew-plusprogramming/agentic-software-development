@@ -9,26 +9,15 @@ Before modifying code, use the repo-native agent system under `agents/`.
 
 The Memory Bank provides durable, structured context for all tasks.
 
-- Overview: `agents/memory-bank.md`
-- Canonical tier: files under `agents/memory-bank/` (PR‑reviewed)
+- Canonical overview and policy: `agents/memory-bank.md`
+- Canonical tiered files: `agents/memory-bank/` (PR‑reviewed)
 
-Principles
+Policies (canonical, de‑duplicated)
 
-- Decisions as ADRs; episodic/reflective memory; tiered storage; handoffs between workflow phases.
-
-Storage Tiers
-
-- Tier 0 — Task Context: ephemeral notes in the active workflow file.
-- Tier 1 — Active Context Ring: rolling buffer summarized in `agents/memory-bank/active.context.md` with Reflexion entries.
-- Tier 2 — Canonical Files: `agents/memory-bank/*` (PR‑reviewed only).
-
-Retrieval Policy
-
-- Identify task type: bug | feature | refactor | ops.
-- Always load: `agents/workflows/default.workflow.md` or a different workflow if more applicable, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md` entries, `agents/memory-bank/active.context.md`.
-- Add by relevance: `agents/memory-bank/tech.context.md`, `agents/memory-bank/system.patterns.md`, and ADRs under `agents/memory-bank/decisions/`.
+- Storage tiers and Retrieval Policy live in `agents/memory-bank.md` and should not be duplicated elsewhere.
+- Retrieval Gate: always load `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`. Include `tech.context.md` and `system.patterns.md` only when they contain substantive, non‑placeholder content.
 - For system‑impacting changes: open an ADR stub PR using `agents/memory-bank/decisions/ADR-0000-template.md`.
-- After each phase: append a 3‑line Reflexion to `agents/memory-bank/active.context.md`; when stable, roll up into an ADR or `agents/memory-bank/system.patterns.md`.
+- After each phase: append a 3‑line Reflexion to `agents/memory-bank/active.context.md`; when stable, roll up learnings into an ADR or `agents/memory-bank/system.patterns.md`.
 
 Update Requirements (per task)
 

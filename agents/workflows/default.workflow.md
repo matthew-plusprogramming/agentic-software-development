@@ -9,7 +9,7 @@ State
 - current_phase: plan
 
 Global Prompts
-- Retrieval setup: Identify task type (bug|feature|refactor|ops). Always include `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`. Add more canonical files by relevance. For system-impacting changes, create an ADR stub PR.
+- Retrieval setup: Identify task type (bug|feature|refactor|ops). Follow the canonical Retrieval Policy in `agents/memory-bank.md`. Always load `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`. Include `agents/memory-bank/tech.context.md` and `agents/memory-bank/system.patterns.md` only if they contain substantive (non-placeholder) content. For system-impacting changes, create an ADR stub PR.
 - Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`.
 - External tools: Use GitHub MCP for git operations.
 - Commit confirmation: Before each commit (including fixups), present the proposed Conventional Commit title (< 70 chars) and body, and ask for explicit approval. Do not commit without approval.
