@@ -40,3 +40,7 @@ One LLM executes work by following process markdowns in `agents/workflows/`.
 - External tools: prefer GitHub MCP for git workflows.
 
 Start with: `agents/workflows/default.workflow.md`
+
+## 📝 Conventions
+
+- Markdown standards: When editing `.md` files, follow CommonMark. Use ATX headings (`#`), one space after `#`, a blank line before and after headings when appropriate, `- ` for lists, fenced code blocks with language tags, inline code in backticks, no trailing spaces, and a final newline.
