@@ -1,6 +1,5 @@
 ---
 last_reviewed: 2025-09-03
-stage: design
 ---
 
 # Technical Context
@@ -18,7 +17,7 @@ Environment
 
 Entrypoints
 - Start with `agents/workflows/default.workflow.md`.
-- When a procedural pattern is marked important in `agents/memory-bank/system.patterns.md`, run the Workflow Synthesis step in the Documenter phase to modify/create workflows.
+- When a procedural pattern is marked important in `agents/memory-bank/system.patterns.md`, run the Workflow Synthesis step in the verify phase to modify/create workflows.
 
 Where To Look First
 - `agents/workflows/*.workflow.md` for current processes
