@@ -19,15 +19,23 @@ Phase: plan
 - Goal: Clarify scope, gather context, and propose approach.
 - Inputs: Issue/ask; `agents/memory-bank/project.brief.md`; `agents/memory-bank/product.context.md` (if present); `agents/memory-bank/system.patterns.md`; `agents/memory-bank/tech.context.md`; recent `agents/memory-bank/progress.log.md`; ADR template for system-impacting changes.
 - Checklist:
-  - Define problem statement, desired outcome, and acceptance criteria.
+  - Define problem statement, desired outcome, and acceptance criteria using a short Given/When/Then block; add a Non-goals bullet.
   - Identify constraints, risks, and assumptions.
   - Map impacted components and critical paths.
   - Identify interfaces, contracts, and invariants; list candidate files and tests to touch.
   - Sketch design/options; choose and justify approach; note performance, security, and migration implications.
   - If system-impacting, open ADR stub.
-- Outputs: Brief plan; acceptance criteria; context notes; file list; invariants list; design notes; ADR stub (if needed); updated `active.context.md` next steps.
+- Example format:
+  ```md
+  Acceptance Criteria (Given/When/Then)
+  - Given X; When Y; Then measurable Z
+
+  Non-goals
+  - Explicitly out of scope: A, B
+  ```
+- Outputs: Brief plan; acceptance criteria (Given/When/Then); Non-goals; context notes; file list; invariants list; design notes; ADR stub (if needed); updated `active.context.md` next steps.
 - Done_when: Scope and criteria are clear; context coverage is credible; approach addresses constraints.
-- Gates: Criteria testable; invariants confirmed; risks mitigated; migration path identified.
+- Gates: Given/When/Then present, specific, and testable; Non-goals captured; invariants confirmed; risks mitigated; migration path identified.
 - Next: build
 
 Phase: build
@@ -48,6 +56,7 @@ Phase: verify
 - Inputs: Plan; acceptance criteria; test harness; diff.
 - Checklist:
   - Run targeted tests; add missing ones nearby if an adjacent pattern exists.
+  - Trace each Given/When/Then to a verification step; confirm Non-goals remain out of scope.
   - Validate error paths and edge cases; re-run build/lint.
   - Update Memory Bank: canonical files under `agents/memory-bank/`; add/update ADRs for accepted decisions; append Reflexion and progress log entries.
   - Workflow Synthesis: If `agents/memory-bank/system.patterns.md` contains new high-importance procedural patterns, then update an existing workflow or create a new one from `agents/workflows/templates/pattern.workflow.template.md`; for workflow changes that alter behavior, open an ADR stub.

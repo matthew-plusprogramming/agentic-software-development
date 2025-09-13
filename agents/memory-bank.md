@@ -1,7 +1,7 @@
 ---
 memory_bank: v1
-generated_at: 2025-09-04
-repo_git_sha: 39fa7b6a9e8a1d06a87060b211fb02e453ece0e1
+generated_at: 2025-09-13
+repo_git_sha: 02f18f4bac821f7453312da7aefdecd8fc9ec555
 ---
 
 Memory Bank
@@ -24,10 +24,6 @@ Retrieval Policy
 - Gate optional files by substance: include `agents/memory-bank/tech.context.md` and `agents/memory-bank/system.patterns.md` only when they contain substantive, non‑placeholder content (more than headings/TBDs). Include relevant ADRs under `agents/memory-bank/decisions/` when directly applicable.
 - For system‑impacting changes, open an ADR stub using `agents/memory-bank/decisions/ADR-0000-template.md`.
 - After each phase, append a 3‑line Reflexion to `agents/memory-bank/active.context.md`; when stable, roll up into an ADR or a relevant stable memory bank file.
-
-Stage Metadata Policy (proposal)
-- Purpose: avoid drift and contradictory `stage:` values across Memory Bank files.
-- Policy: prefer `last_reviewed` as the status indicator; omit `stage` unless it conveys actionable workflow state. When used in this template, set `stage: template`. In concrete repos, if kept, restrict values to `plan|build|verify` and update only when materially relevant.
 
 Validation scripts
 - Validate file paths across all Memory Bank files: `npm run memory:validate`
