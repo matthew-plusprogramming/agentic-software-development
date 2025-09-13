@@ -29,3 +29,19 @@ export const CODE_SPAN_REGEX = /`([^`]+)`/g;
 
 // Schemes to ignore when extracting markdown links
 export const LINK_IGNORE_SCHEMES = ['http:', 'https:', 'mailto:', 'tel:'];
+
+// Regexes used by validators (centralized)
+export const FENCED_BACKTICK_BLOCK_REGEX = /```[\s\S]*?```/g;
+export const FENCED_TILDE_BLOCK_REGEX = /~~~[\s\S]*?~~~/g;
+// Inline markdown links and images: optional leading ! for images
+// Robust inline markdown link/image regex source and factory
+export const INLINE_LINK_OR_IMAGE_RE_SOURCE = String.raw`!?\[[^\]]*]\(\s*(<[^>]*>|[^()\s]+(?:\([^)]*\)[^()\s]*)*)(?:\s+["'(][^"')]*["')])?\s*\)`;
+export const makeInlineLinkOrImageRe = () => new RegExp(INLINE_LINK_OR_IMAGE_RE_SOURCE, 'g');
+// Reference-style link definition at start of line
+export const REF_DEFINITION_REGEX = /^\s*\[[^\]]+\]:\s*(\S+)/;
+// Plain-text agents/ path references
+export const PLAIN_AGENTS_REF_REGEX = /agents\/[A-Za-z0-9._\/-]+/g;
+// Detect URL scheme prefixes
+export const SCHEME_PREFIX_REGEX = /^[a-zA-Z][a-zA-Z0-9+.-]*:/;
+// Trim common trailing punctuation adjacent to paths
+export const TRAILING_PUNCTUATION_REGEX = /[.,;:!?)>\]]+$/g;

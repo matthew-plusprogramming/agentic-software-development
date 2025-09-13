@@ -8,22 +8,16 @@ import {
   PATH_PREFIXES,
   CODE_SPAN_REGEX,
   LINK_IGNORE_SCHEMES,
+  FENCED_BACKTICK_BLOCK_REGEX,
+  FENCED_TILDE_BLOCK_REGEX,
+  REF_DEFINITION_REGEX,
+  PLAIN_AGENTS_REF_REGEX,
+  SCHEME_PREFIX_REGEX,
+  TRAILING_PUNCTUATION_REGEX,
+  makeInlineLinkOrImageRe,
 } from './constants.js';
 
 const root = process.cwd();
-
-/**
- * Robust inline markdown link/image regex:
- * - Supports []() and ![]()
- * - Allows <...> around URLs
- * - Allows optional title ("..." or '...' or (...))
- * - Tolerates parentheses within the URL segment
- *
- * IMPORTANT: Use via makeLinkRe() to avoid lastIndex bleed between calls.
- */
-const LINK_RE_SOURCE =
-  String.raw`!?\[[^\]]*]\(\s*(<[^>]*>|[^()\s]+(?:\([^)]*\)[^()\s]*)*)(?:\s+["'(][^"')]*["')])?\s*\)`;
-const makeLinkRe = () => new RegExp(LINK_RE_SOURCE, 'g');
 
 // Collect all Memory Bank markdown files under MEMORY_DIR/** and the overview file
 // Also include workflows under WORKFLOWS_DIR/** and the workflows overview file
@@ -60,10 +54,8 @@ const filesToScan = collectDocsFiles();
 
 // Remove fenced code blocks to avoid false positives when scanning plain text/links
 const stripFencedCodeBlocks = (md) => md
-  // ``` fences
-  .replace(/```[\s\S]*?```/g, '')
-  // ~~~ fences
-  .replace(/~~~[\s\S]*?~~~/g, '');
+  .replace(FENCED_BACKTICK_BLOCK_REGEX, '')
+  .replace(FENCED_TILDE_BLOCK_REGEX, '');
 
 // Inline code spans (keep existing behavior)
 const extractCodeSpanCandidates = (md) => {
@@ -84,7 +76,7 @@ const extractMarkdownLinks = (md) => {
   const set = new Set();
   // Remove fenced blocks to reduce noise
   const text = stripFencedCodeBlocks(md);
-  const regex = makeLinkRe();
+  const regex = makeInlineLinkOrImageRe();
   let m;
   while ((m = regex.exec(text))) {
     let inside = (m[1] || '').trim();
@@ -101,7 +93,7 @@ const extractMarkdownLinks = (md) => {
     // Ignore in-page anchors and external schemes
     if (href.startsWith('#')) continue;
     if (href.startsWith('//')) continue; // protocol-relative
-    const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href);
+    const hasScheme = SCHEME_PREFIX_REGEX.test(href);
     if (hasScheme && LINK_IGNORE_SCHEMES.includes(href.split(':', 1)[0] + ':')) continue;
     set.add(href);
   }
@@ -113,9 +105,8 @@ const extractReferenceLinks = (md) => {
   const set = new Set();
   const text = stripFencedCodeBlocks(md);
   const lines = text.split(/\r?\n/);
-  const defRe = /^\s*\[[^\]]+\]:\s*(\S+)/;
   for (const line of lines) {
-    const m = line.match(defRe);
+    const m = line.match(REF_DEFINITION_REGEX);
     if (!m) continue;
     let href = m[1];
     if (!href) continue;
@@ -123,7 +114,7 @@ const extractReferenceLinks = (md) => {
     href = href.trim();
     if (!href || href.startsWith('#')) continue;
     if (href.startsWith('//')) continue;
-    const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href);
+    const hasScheme = SCHEME_PREFIX_REGEX.test(href);
     if (hasScheme && LINK_IGNORE_SCHEMES.includes(href.split(':', 1)[0] + ':')) continue;
     set.add(href);
   }
@@ -134,12 +125,11 @@ const extractReferenceLinks = (md) => {
 const extractAgentRefs = (md) => {
   const set = new Set();
   const text = stripFencedCodeBlocks(md);
-  const re = /agents\/[A-Za-z0-9._\/-]+/g;
   let m;
-  while ((m = re.exec(text))) {
+  while ((m = PLAIN_AGENTS_REF_REGEX.exec(text))) {
     let token = m[0];
     // Trim trailing punctuation commonly adjacent to paths
-    token = token.replace(/[.,;:!?)>\]]+$/g, '');
+    token = token.replace(TRAILING_PUNCTUATION_REGEX, '');
     set.add(token);
   }
   return [...set];
@@ -262,7 +252,7 @@ for (const abs of filesToScan) {
 
   // 2) Inline links/images (same robust regex as extractor)
   const strippedForLinks = stripFencedCodeBlocks(md);
-  const linkRe = makeLinkRe();
+  const linkRe = makeInlineLinkOrImageRe();
   let lm;
   while ((lm = linkRe.exec(strippedForLinks))) {
     let inside = (lm[1] || '').trim();
@@ -271,7 +261,7 @@ for (const abs of filesToScan) {
     else inside = inside.split(/\s+/)[0];
     const href = inside.trim();
     if (!href || href.startsWith('#') || href.startsWith('//')) continue;
-    const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href);
+    const hasScheme = SCHEME_PREFIX_REGEX.test(href);
     if (hasScheme && LINK_IGNORE_SCHEMES.includes(href.split(':', 1)[0] + ':')) continue;
     const norm = normalizeCandidate(href, dir);
     if (!norm) continue;
@@ -281,15 +271,14 @@ for (const abs of filesToScan) {
 
   // 3) Reference-style definitions
   const lines = stripFencedCodeBlocks(md).split(/\r?\n/);
-  const defRe = /^\s*\[[^\]]+\]:\s*(\S+)/;
   for (let i = 0; i < lines.length; i++) {
-    const m = lines[i].match(defRe);
+    const m = lines[i].match(REF_DEFINITION_REGEX);
     if (!m) continue;
     let href = m[1];
     if (href.startsWith('<') && href.endsWith('>')) href = href.slice(1, -1);
     href = href.trim();
     if (!href || href.startsWith('#') || href.startsWith('//')) continue;
-    const hasScheme = /^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(href);
+    const hasScheme = SCHEME_PREFIX_REGEX.test(href);
     if (hasScheme && LINK_IGNORE_SCHEMES.includes(href.split(':', 1)[0] + ':')) continue;
     const norm = normalizeCandidate(href, dir);
     if (!norm) continue;
@@ -297,11 +286,10 @@ for (const abs of filesToScan) {
   }
 
   // 4) Plain-text agents/** references
-  const agentRe = /agents\/[A-Za-z0-9._\/-]+/g;
   let am;
   const stripped = stripFencedCodeBlocks(md);
-  while ((am = agentRe.exec(stripped))) {
-    let token = am[0].replace(/[.,;:!?)>\]]+$/g, '');
+  while ((am = PLAIN_AGENTS_REF_REGEX.exec(stripped))) {
+    let token = am[0].replace(TRAILING_PUNCTUATION_REGEX, '');
     const norm = normalizeCandidate(token, dir);
     if (!norm) continue;
     if (!checkPath(norm)) recordMiss(norm);
