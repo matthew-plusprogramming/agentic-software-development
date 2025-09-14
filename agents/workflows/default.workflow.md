@@ -5,9 +5,6 @@ Title: Default Software Change Workflow
 Intent
 - Orchestrate end-to-end changes with visible, diff-able phases, artifacts, and gates. Keeps memory updated across phases.
 
-State
-- current_phase: plan
-
 Global Prompts
 - Retrieval: Follow the Retrieval Policy in `agents/memory-bank.md`.
 - Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`.
