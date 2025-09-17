@@ -12,10 +12,8 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
 - Scripts: `npm run memory:validate` and `npm run memory:drift` to keep context correct and in sync with git.
 
 **Start Here**
-- Read `AGENTS.md` for the repo‑native agent system overview.
-- Open `agents/workflows/default.workflow.md` and begin at the current phase.
-- Keep `agents/memory-bank/*` updated as you work (Reflexion notes after each phase).
-  - This happens automatically when using agentic tools such as Codex
+- Read [`AGENTS.md`](AGENTS.md) for the full repo-native agent workflow and Memory Bank obligations.
+- Follow the current phase in `agents/workflows/default.workflow.md`.
 
 **Repository Layout**
 - `agents/memory-bank.md`: Memory Bank overview + stamped git SHA for drift checks.

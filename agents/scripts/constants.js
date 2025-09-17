@@ -14,7 +14,7 @@ export const PATH_PREFIXES = ['apps/', 'packages/', 'cdk/', 'agents/'];
 
 // Directories considered for drift checks between the stamped SHA and HEAD.
 // i.e. these are probably the same as above (e.g. 'src/', 'packages/')
-export const DRIFT_TRACKED_DIRS = ['apps', 'cdk', 'packages'];
+export const DRIFT_TRACKED_DIRS = ['agents', 'apps', 'cdk', 'packages'];
 
 // Root-level files that may be referenced inside memory bank markdown.
 export const ROOT_BASENAMES = new Set([
