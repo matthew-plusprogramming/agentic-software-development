@@ -7,7 +7,7 @@ Intent
 
 Global Prompts
 - Retrieval: Follow the Retrieval Policy in `agents/memory-bank.md`.
-- Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`.
+- Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`; doc-only or advisory tasks may batch these updates upon completion when no canonical files change.
 - External tools: See `AGENTS.md` for MCP guidance.
 - Commit confirmations: If interactive approvals are enabled, request commit confirmation; otherwise proceed with clear, conventional commit messages.
 - Markdown standards: See `AGENTS.md`.
