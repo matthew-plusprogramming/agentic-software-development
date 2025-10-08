@@ -62,15 +62,15 @@ Example (Declarative)
 ## Patterns
 
 - ID: PAT-20251004-deep-planning
-  Title: Deep Planning Gate
-  Type: procedural
-  Importance: high
-  Context: When initiatives demand exhaustive up-front planning before implementation, especially multi-team or compliance-sensitive projects.
-  Trigger: Request explicitly calls for deep planning or risk analysis before build tasks begin.
-  Steps:
+  - Title: Deep Planning Gate
+  - Type: procedural
+  - Importance: high
+  - Context: When initiatives demand exhaustive up-front planning before implementation, especially multi-team or compliance-sensitive projects.
+  - Trigger: Request explicitly calls for deep planning or risk analysis before build tasks begin.
+  - Steps:
     1. Run the Deep Planning workflow to harvest requirements and constraints.
     2. Produce mandated deliverables (contracts, data model, risk register, etc.) and capture review gates.
     3. Secure sign-offs and run memory validations before emitting execution tasks.
-  Signals: Fewer mid-build surprises, on-time delivery against committed budgets, reduced escalations.
-  Workflow_Impact: create:deep-planning.workflow.md
+  - Signals: Fewer mid-build surprises, on-time delivery against committed budgets, reduced escalations.
+  - Workflow_Impact: create:deep-planning.workflow.md
   Status: adopted
