@@ -3,14 +3,17 @@ Title: Code Review Workflow
 ---
 
 Intent
+
 - Supply a reliable, repeatable process for AI-led code reviews that surface actionable findings, respect project guardrails, and keep reviewers aligned on severity and merge guidance.
 
 Global Prompts
+
 - Retrieval: Load context per `agents/memory-bank.md` (workflow, brief, progress log, active context, optional tech/system patterns when substantive).
 - Tone: Be constructive, specific, and solution-oriented; prefer "Consider ... because ..." to blunt rejections.
 - Safety: Default to caution when unsure; flag uncertainty explicitly rather than guessing.
 
 Phase: plan
+
 - Goal: Gather all relevant inputs and validate readiness before judging the change.
 - Inputs: Request description, specs or tickets, proposed diff/patch, commit message, CI/test outputs, style and security guidelines, architectural docs, Memory Bank context, prior discussions.
 - Checklist:
@@ -23,6 +26,7 @@ Phase: plan
 - Next: build
 
 Phase: build
+
 - Goal: Evaluate the change end-to-end, log findings with severities, and propose actionable remedies.
 - Checklist:
   - Understand the diff: walk through flow of data and control; map new/changed interfaces and invariants.
@@ -43,6 +47,7 @@ Phase: build
 - Next: verify
 
 Phase: verify
+
 - Goal: Finalize the review package, ensure guardrails are met, and publish concise guidance.
 - Checklist:
   - Confirm every review dimension lists either "no issues" or explicit findings; avoid silent omissions.
@@ -60,6 +65,7 @@ Phase: verify
 - Next: done
 
 Guardrails
+
 - Do not fabricate or infer results without evidence; mark missing data and recommend follow-up.
 - Do not refactor or request changes unrelated to the diff’s scope unless they introduce risk.
 - Default to blocking when correctness, security, or compliance cannot be validated.
@@ -67,4 +73,5 @@ Guardrails
 - Record uncertainty clearly and prefer actionable questions over assumptions.
 
 End
+
 - Close with concise recap of decision, key blockers (if any), and suggested next steps for the author.

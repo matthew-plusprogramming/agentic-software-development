@@ -4,14 +4,10 @@ last_reviewed: 2025-09-03
 
 # Active Context
 
-Current Focus
--
+## Current Focus
 
-Next Steps
--
+## Next Steps
 
-Open Decisions
--
+## Open Decisions
 
-Reflexion
--
+## Reflexion

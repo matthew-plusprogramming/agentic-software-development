@@ -4,6 +4,7 @@ stage: planning
 ---
 
 # ADR-0000: <Decision>
+
 Status: Proposed | Accepted | Superseded
 Context:
 Decision:
