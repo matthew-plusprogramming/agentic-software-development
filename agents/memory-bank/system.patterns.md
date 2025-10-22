@@ -5,13 +5,16 @@ last_reviewed: 2025-09-03
 # System Patterns
 
 Overview
+
 - This file captures durable patterns discovered during work. Classify each as declarative (facts) or procedural (repeatable sequences). Only procedural, high-value patterns may change workflows.
 
 Definitions
+
 - Declarative: Facts, mappings, invariants. Stored here and in related context files. Does not change workflows.
 - Procedural: Steps/recipes that can be reused. Candidates for workflow synthesis.
 
 Pattern Entry Format
+
 - ID: PAT-YYYYMMDD-<slug>
 - Title: short name
 - Type: procedural | declarative
@@ -24,6 +27,7 @@ Pattern Entry Format
 - Status: proposed | adopted
 
 Synthesis Rule
+
 - If Type=procedural and Importance>=medium and recurring across ≥2 tasks (per `agents/memory-bank/progress.log.md` or Reflexion), then:
   - Propose Workflow_Impact=modify:<existing> if pattern naturally augments an existing workflow phase; else Workflow_Impact=create:<slug>.
   - In the verify phase, perform "Workflow Synthesis":
@@ -32,6 +36,7 @@ Synthesis Rule
   - For system-impacting changes, open ADR stub via `agents/memory-bank/decisions/ADR-0000-template.md`.
 
 Example (Procedural)
+
 - ID: PAT-20250903-workflow-synthesis
 - Title: Workflow Synthesis from Procedural Patterns
 - Type: procedural
@@ -49,6 +54,7 @@ Example (Procedural)
 - Status: adopted
 
 Example (Declarative)
+
 - ID: PAT-20250903-env-facts
 - Title: Environment Facts
 - Type: declarative

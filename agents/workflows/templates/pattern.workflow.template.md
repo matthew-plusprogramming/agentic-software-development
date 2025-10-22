@@ -3,13 +3,16 @@ Title: <Pattern Name> Workflow
 ---
 
 Intent
+
 - Encapsulate a high-importance procedural pattern discovered in `agents/memory-bank/system.patterns.md` as a reusable, diff-able workflow.
 
 Global Prompts
+
 - Follow the same phase structure as default; customize checklists to the pattern’s steps.
 - Keep unrelated changes out; update Memory Bank as needed.
 
 Phase: plan
+
 - Goal: Frame applicability, gather context, and tailor the approach.
 - Inputs: Pattern entry in `agents/memory-bank/system.patterns.md`; relevant tech/product context; recent progress and active context.
 - Checklist:
@@ -20,6 +23,7 @@ Phase: plan
 - Next: build
 
 Phase: build
+
 - Goal: Execute the pattern steps with minimal diffs and high clarity.
 - Checklist:
   - Implement scoped changes according to the pattern; follow repo style.
@@ -29,6 +33,7 @@ Phase: build
 - Next: verify
 
 Phase: verify
+
 - Goal: Validate behavior, edge cases, and update Memory Bank.
 - Checklist:
   - Run targeted tests; validate signals from the pattern.
@@ -41,4 +46,5 @@ Phase: verify
 - Next: done
 
 End
+
 - Close with a brief summary and any follow-ups.
