@@ -1,6 +1,6 @@
 ## 🔧 Start Here (for AI agents)
 
-Before modifying code, use the repo-native agent system under `agents/`.
+Before modifying code, load required context with `node agents/scripts/load-context.mjs`, then use the repo-native agent system under `agents/`.
 
 - Memory Bank overview: `agents/memory-bank.md`
 - Workflows overview: `agents/workflows.md`
@@ -9,15 +9,8 @@ Before modifying code, use the repo-native agent system under `agents/`.
 
 The Memory Bank provides durable, structured context for all tasks.
 
-- Canonical overview and policy: `agents/memory-bank.md`
-- Canonical tiered files: `agents/memory-bank/` (PR‑reviewed)
-
-Policies (canonical, de‑duplicated)
-
-- Storage tiers and Retrieval Policy live in `agents/memory-bank.md` and should not be duplicated elsewhere.
-- Retrieval Gate: always load `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`. Include `tech.context.md` and `system.patterns.md` only when they contain substantive, non‑placeholder content.
-- For system‑impacting changes: open an ADR stub PR using `agents/memory-bank/decisions/ADR-0000-template.md`.
-- After each phase: append a 3‑line Reflexion to `agents/memory-bank/active.context.md`; when stable, roll up learnings into an ADR or `agents/memory-bank/system.patterns.md`.
+- Overview and canonical policy: `agents/memory-bank.md` (source of truth for storage tiers and retrieval rules)
+- Canonical files live under: `agents/memory-bank/` (PR‑reviewed)
 
 Update Requirements (per task)
 
@@ -25,10 +18,16 @@ Update Requirements (per task)
 - Stamp `agents/memory-bank.md` front matter:
   - `generated_at`: today (YYYY‑MM‑DD)
   - `repo_git_sha`: `git rev-parse HEAD`
+- Use `node agents/scripts/update-memory-stamp.mjs` to automatically apply the stamp once updates are ready.
 - Validate and check drift:
   - `npm run memory:validate` — verify referenced paths exist across all memory files
   - `npm run memory:drift` — ensure stamped SHA matches or intentionally update
 - Include Memory Bank updates in the same PR.
+
+Convenience helpers
+
+- `node agents/scripts/append-memory-entry.mjs --target active --plan "..." --build "..." --verify "..."` appends a reflexion block to `active.context.md`.
+- `node agents/scripts/append-memory-entry.mjs --target progress --message "..."` appends a line to `progress.log.md`.
 
 ## 🧭 Workflow Process List
 
@@ -39,8 +38,9 @@ One LLM executes work by following process markdowns in `agents/workflows/`.
 - The LLM loads the process .md (+ linked partials), executes the current phase, writes artifacts, updates phase state, advances when gates pass, and logs a short Reflexion to the Memory Bank.
 - External tools: prefer GitHub MCP for git workflows.
 
+It is very important you strictly follow the agent workflows.
+
 Start with: `agents/workflows/default.workflow.md`
+## Conventions
 
-## 📝 Conventions
-
-- Markdown standards: When editing `.md` files, follow CommonMark. Use ATX headings (`#`), one space after `#`, a blank line before and after headings when appropriate, `- ` for lists, fenced code blocks with language tags, inline code in backticks, no trailing spaces, and a final newline.
+- Markdown: use Prettier via `npm run format:markdown` for `agents/**`; `npm run lint`/`lint:fix` runs it via prelint hook.
