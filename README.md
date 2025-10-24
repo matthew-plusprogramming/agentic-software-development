@@ -1,63 +1,56 @@
 # Agentic Software Development Template
 
-Build software with AI agents using durable Memory Bank + explicit multi‑phase Workflows. This template gives you a lightweight, PR‑friendly way to capture knowledge, steer execution, and validate changes.
+Build software with AI agents using durable Memory Bank + explicit multi-phase Workflows. This template keeps context close to code, makes execution visible, and keeps docs and diffs PR-friendly.
 
-**Who This Is For**
+**What You Get**
+- Memory Bank: tiered, structured markdown under `agents/memory-bank/**` with validation, stamping, and drift checks.
+- Workflows: diff-able `agents/workflows/**` guides for the plan → build → verify loop plus supporting prompts.
+- Agent scripts: repo-native helpers under `agents/scripts/**` for loading context, searching files, validating canonicals, and stamping updates.
+
+**Who This Helps**
 - Individuals or teams who want agents (and humans) to work predictably.
 - Folks who value durable context, visible plans, and change validation.
 
-**What You Get**
-- Memory Bank: tiered, structured markdown under `agents/memory-bank/**` with validation and drift checks.
-- Workflows: clear, diff‑able process files under `agents/workflows/**` (plan → build → verify).
-- Scripts: `npm run memory:validate` and `npm run memory:drift` to keep context correct and in sync with git.
+## Start Here
+1. Read [`AGENTS.md`](AGENTS.md) for the complete repo-native agent obligations and tooling overview.
+2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files.
+3. Follow the current phase checklist in `agents/workflows/default.workflow.md` and log reflections after every phase.
 
-**Start Here**
-- Read [`AGENTS.md`](AGENTS.md) for the full repo-native agent workflow and Memory Bank obligations.
-- Follow the current phase in `agents/workflows/default.workflow.md`.
+## Working a Task (Plan → Build → Verify)
+- **Plan**: clarify scope, capture Given/When/Then acceptance criteria, list non-goals, and record the plan reflection via `node agents/scripts/append-memory-entry.mjs --target active --plan "..."`
+- **Build**: apply focused changes, keep unrelated edits out, and run `npm run phase:check` (runs the lint placeholder and `node agents/scripts/check-code-quality.mjs`).
+- **Verify**: gather a line-numbered diff with `node agents/scripts/git-diff-with-lines.mjs`, run targeted tests, update canonicals, then finish with `npm run agent:finalize` (formats markdown, validates the Memory Bank, checks drift, and reruns quality checks).
+- After each phase, append a 3-line reflection to `agents/memory-bank/active.context.md` and add a progress log entry via `node agents/scripts/append-memory-entry.mjs --target progress --message "..."`.
+- When Memory Bank canonicals change, stamp updates with `node agents/scripts/update-memory-stamp.mjs` before shipping.
 
-**Repository Layout**
-- `agents/memory-bank.md`: Memory Bank overview + stamped git SHA for drift checks.
-- `agents/memory-bank/**`: Canonical context (project, product, tech, patterns, ADRs, progress, active context).
-- `agents/workflows/**`: Process files that drive multi‑phase execution.
-- `agents/scripts/**`: Node scripts to validate paths and check drift; tweak `constants.js` for your repo.
-- `AGENTS.md`: Quick orientation for agents.
+## Repository Layout
+- `agents/memory-bank.md`: Memory Bank overview plus stamped `generated_at` + `repo_git_sha` for drift tracking.
+- `agents/memory-bank/**`: Canonical context (project, product, tech, decisions, patterns, progress, active reflections).
+- `agents/workflows/**`: Default and pattern-specific workflows that drive the phase gates.
+- `agents/scripts/**`: Context loaders, search utilities, validation/stamping helpers, and quality checks (`constants.js` centralizes path settings).
+- `AGENTS.md`: Quick orientation for agents operating in this template.
 
-**Quickstart**
-1) Use this as a template or copy `agents/` + `AGENTS.md` into your repo.
-2) Adjust `agents/scripts/constants.js`:
-   - `PATH_PREFIXES`: top‑level code paths to validate (e.g., `src/`, `packages/`).
-   - `DRIFT_TRACKED_DIRS`: directories whose changes should trigger a drift warning.
-3) Update Memory Bank canonicals:
-   - Fill `agents/memory-bank/project.brief.md`, `product.context.md`, `tech.context.md`.
-   - Keep `agents/memory-bank/active.context.md` and `progress.log.md` flowing during work.
-4) Run validation anytime:
-   - `npm run memory:validate` — verifies referenced paths exist in all Memory files.
-   - `npm run memory:drift` — checks stamped SHA vs HEAD for tracked areas.
-5) Execute work via the workflow:
-   - Follow checklists in `agents/workflows/default.workflow.md`.
-   - After each phase, append a 3‑line reflection to `active.context.md` and a brief entry to `progress.log.md`.
+## Commands & Scripts
+- `node agents/scripts/load-context.mjs`: Print the required Memory Bank/workflow files for the current task.
+- `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers (use shell fallbacks for multi-file reads until a dedicated reader lands).
+- `node agents/scripts/append-memory-entry.mjs`: Append reflections to `active.context.md` or log lines to `progress.log.md`.
+- `node agents/scripts/update-memory-stamp.mjs`: Stamp canonicals with the latest git SHA after updates.
+- `npm run memory:validate`: Ensure referenced paths in Memory Bank files exist.
+- `npm run memory:drift`: Compare the stamped SHA in `agents/memory-bank.md` to `HEAD` for tracked directories.
+- `npm run phase:check`: Run the lint placeholder (`npm run lint:fix`) and repo quality checks (`node agents/scripts/check-code-quality.mjs`).
+- `npm run agent:finalize`: Format markdown, validate the Memory Bank, check drift, and run the phase check in one pass.
 
-**How It Works**
-- Memory Bank (Durable Context)
-  - Tiers: Task Context (ephemeral) → Active Context Ring (rolling) → Canonical Files (PR‑reviewed).
-  - Retrieval Policy: always include `project.brief.md`, recent `progress.log.md`, and `active.context.md`; add `tech.context.md`, `system.patterns.md`, and ADRs as relevant.
-  - Stamping: update `agents/memory-bank.md` front matter with `generated_at` and `repo_git_sha` when shipping a change touching canonicals.
-- Workflows (Explicit Phases)
-  - Phases: plan → build → verify.
-  - Synthesis: when a procedural pattern in `system.patterns.md` proves valuable, modify/create a workflow (template provided). System‑impacting changes may warrant an ADR under `agents/memory-bank/decisions/`.
+## Adopt This Template
+1. Copy `agents/` and `AGENTS.md` into your repository root (or fork this template).
+2. Update `agents/scripts/constants.js`:
+   - `PATH_PREFIXES`: directories to validate (e.g., `src/`, `packages/`).
+   - `DRIFT_TRACKED_DIRS`: directories whose changes should trigger drift warnings.
+3. Fill in Memory Bank canonicals (project brief, product/tech context) and keep `active.context.md` + `progress.log.md` flowing during work.
+4. Align workflow prompts to your stack or add new workflows under `agents/workflows/**` as patterns emerge.
+5. Gate PRs by running `npm run agent:finalize` locally or in CI.
 
-**Adopt In An Existing Repo**
-- Copy `agents/` and `AGENTS.md` into your project root.
-- Adjust `agents/scripts/constants.js` to reflect your code layout.
-- Align default workflow prompts to your stack; add more workflows if needed.
-- Seed `project.brief.md` and product/tech context with your project’s facts.
-- Gate PRs by running `npm run memory:validate` and `npm run memory:drift` locally or in CI.
-
-**Commands**
-- `npm run memory:validate`: Scans Memory Bank markdown for inline code/path references and ensures they exist.
-- `npm run memory:drift`: Compares stamped SHA in `agents/memory-bank.md` to `HEAD` for tracked dirs and flags drift.
-
-**Tips & Troubleshooting**
-- Validation failures: fix bad paths in memory files or update `PATH_PREFIXES`/`ROOT_BASENAMES` in `agents/scripts/constants.js`.
-- Drift failures: update `generated_at` and `repo_git_sha` in `agents/memory-bank.md` after reviewing canonical changes; rerun the check.
-- Git operations: prefer GitHub MCP or your standard tooling; workflows are tool‑agnostic.
+## Tips & Troubleshooting
+- Validation failures: update incorrect paths in Memory Bank files or adjust `PATH_PREFIXES`/`ROOT_BASENAMES` in `agents/scripts/constants.js`.
+- Drift failures: review canonical changes, then refresh the stamp via `node agents/scripts/update-memory-stamp.mjs`.
+- Missing helpers: `read-files.mjs` is referenced in process docs but not yet included; rely on your editor or shell for now when streaming multiple files.
+- Git and tooling: workflows are tool-agnostic—use your preferred git client or MCP integration while keeping the Memory Bank and reflections current.
