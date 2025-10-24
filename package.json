@@ -5,6 +5,7 @@
   "packageManager": "npm@11.5.2",
   "type": "module",
   "devDependencies": {
+    "picomatch": "^4.0.3",
     "prettier": "^3.6.2"
   },
   "scripts": {
@@ -15,5 +16,5 @@
     "memory:drift": "node agents/scripts/check-memory-drift.mjs",
     "phase:check": "npm run lint:fix && node agents/scripts/check-code-quality.mjs",
     "agent:finalize": "npm run format:markdown && npm run memory:validate && npm run memory:drift && npm run phase:check"
-  }// TODO: Reflect this in monorepo, continue scanning
+  }
 }
