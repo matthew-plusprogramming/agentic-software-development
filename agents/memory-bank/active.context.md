@@ -10,4 +10,4 @@ last_reviewed: 2025-09-03
 
 ## Open Decisions
 
-## Reflexion
+## reflection
