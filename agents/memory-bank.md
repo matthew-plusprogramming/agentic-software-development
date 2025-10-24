@@ -7,6 +7,7 @@ Memory Bank
 
 - Canonical: `agents/memory-bank/*`
 - Single source of truth: This file defines knowledge representation. Other docs should reference (not duplicate) these rules.
+- Script catalog: `agents/tools.md` lists automation helpers for loading context, stamping metadata, and running validations.
 
 Procedural vs Declarative
 
