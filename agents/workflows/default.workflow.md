@@ -8,10 +8,9 @@ Intent
 
 Global Prompts
 
-- Retrieval: Follow the Retrieval Policy in `agents/memory-bank.md`.
+- Information Retrieval: Follow the Retrieval Policy in `agents/memory-bank.md`.
 - Reflexion note: After each phase, add a 3-line Reflexion to `active.context.md` and append a succinct entry to `progress.log.md`; doc-only or advisory tasks may batch these updates upon completion when no canonical files change.
   - CLI helpers: `node agents/scripts/append-memory-entry.mjs --target active ...` for reflexions and `--target progress ...` for log entries keep formatting consistent.
-- External tools: See `AGENTS.md` for MCP guidance.
 - Markdown standards: See `AGENTS.md`.
 
 Phase: plan
@@ -19,6 +18,7 @@ Phase: plan
 - Goal: Clarify scope, gather context, and propose approach.
 - Inputs: Issue/ask; `agents/memory-bank/project.brief.md`; `agents/memory-bank/product.context.md` (if present); `agents/memory-bank/system.patterns.md`; `agents/memory-bank/tech.context.md`; recent `agents/memory-bank/progress.log.md`; ADR template for system-impacting changes.
 - Checklist:
+  - Run `node agents/scripts/load-context.mjs` (add `--include-optional` when optional tiers are relevant) to review required Memory Bank context.
   - Define problem statement, desired outcome, and acceptance criteria using a short Given/When/Then block; add a Non-goals bullet.
   - Identify constraints, risks, and assumptions.
   - Map impacted components and critical paths.
@@ -63,6 +63,7 @@ Phase: verify
 - Goal: Validate behavior against criteria and finalize Memory Bank updates.
 - Inputs: Plan; acceptance criteria; test harness; diff.
 - Checklist:
+  - Run `node agents/scripts/git-diff-with-lines.mjs` to capture line-numbered diff context for the verification report.
   - Run targeted tests; add missing ones nearby if an adjacent pattern exists.
   - Trace each Given/When/Then to a verification step; confirm Non-goals remain out of scope.
   - Confirm implemented tests follow `agents/memory-bank/testing.guidelines.md` (boundaries, DI, fakes/mocks, flake-proofing).
@@ -80,3 +81,4 @@ Phase: verify
 End
 
 - Close with summary, surfaced tests, proposed commit message, and next steps.
+- Make sure you propose a commit message.
