@@ -35,7 +35,7 @@ Build software with AI agents using durable Memory Bank + explicit multi‑phase
    - `npm run memory:drift` — checks stamped SHA vs HEAD for tracked areas.
 5) Execute work via the workflow:
    - Follow checklists in `agents/workflows/default.workflow.md`.
-   - After each phase, append a 3‑line Reflexion to `active.context.md` and a brief entry to `progress.log.md`.
+   - After each phase, append a 3‑line reflection to `active.context.md` and a brief entry to `progress.log.md`.
 
 **How It Works**
 - Memory Bank (Durable Context)
