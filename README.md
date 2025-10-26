@@ -20,7 +20,7 @@ Build software with AI agents using durable Memory Bank + explicit multi-phase W
 - **Plan**: clarify scope, capture Given/When/Then acceptance criteria, list non-goals, and record the plan reflection via `node agents/scripts/append-memory-entry.mjs --target active --plan "..."`
 - **Build**: apply focused changes, keep unrelated edits out, and run `npm run phase:check` (runs the lint placeholder and `node agents/scripts/check-code-quality.mjs`).
 - **Verify**: gather a line-numbered diff with `node agents/scripts/git-diff-with-lines.mjs`, run targeted tests, update canonicals, then finish with `npm run agent:finalize` (formats markdown, validates the Memory Bank, checks drift, and reruns quality checks).
-- After each phase, append a 3-line reflection to `agents/memory-bank/active.context.md` and add a progress log entry via `node agents/scripts/append-memory-entry.mjs --target progress --message "..."`.
+- After each phase, append a 3-line reflection to `agents/memory-bank/active.context.md`.
 - When Memory Bank canonicals change, stamp updates with `node agents/scripts/update-memory-stamp.mjs` before shipping.
 
 ## Repository Layout
@@ -33,7 +33,7 @@ Build software with AI agents using durable Memory Bank + explicit multi-phase W
 ## Commands & Scripts
 - `node agents/scripts/load-context.mjs`: Print the required Memory Bank/workflow files for the current task.
 - `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers (use shell fallbacks for multi-file reads until a dedicated reader lands).
-- `node agents/scripts/append-memory-entry.mjs`: Append reflections to `active.context.md` or log lines to `progress.log.md`.
+- `node agents/scripts/append-memory-entry.mjs`: Append reflections to `active.context.md`.
 - `node agents/scripts/update-memory-stamp.mjs`: Stamp canonicals with the latest git SHA after updates.
 - `npm run memory:validate`: Ensure referenced paths in Memory Bank files exist.
 - `npm run memory:drift`: Compare the stamped SHA in `agents/memory-bank.md` to `HEAD` for tracked directories.
@@ -45,7 +45,7 @@ Build software with AI agents using durable Memory Bank + explicit multi-phase W
 2. Update `agents/scripts/constants.js`:
    - `PATH_PREFIXES`: directories to validate (e.g., `src/`, `packages/`).
    - `DRIFT_TRACKED_DIRS`: directories whose changes should trigger drift warnings.
-3. Fill in Memory Bank canonicals (project brief, product/tech context) and keep `active.context.md` + `progress.log.md` flowing during work.
+3. Fill in Memory Bank canonicals (project brief, product/tech context) and keep `active.context.md` flowing during work.
 4. Align workflow prompts to your stack or add new workflows under `agents/workflows/**` as patterns emerge.
 5. Gate PRs by running `npm run agent:finalize` locally or in CI.
 

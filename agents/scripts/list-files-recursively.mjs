@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { promises as fs } from 'node:fs';
-import { resolve, relative, join, extname } from 'node:path';
-import process from 'node:process';
+import { promises as fs } from "node:fs";
+import { resolve, relative, join, extname } from "node:path";
+import process from "node:process";
 
-const USAGE = `Usage: node agents/scripts/list-files-recursively.mjs --root <path> --pattern <pattern>
+const USAGE = `Usage: node agents/scripts/list-files-recursively.mjs --root <path> [--pattern <pattern>]
        [--types ts|md|all] [--regex] [--case-sensitive]
 
 Recursively scans the provided root directory, filters files whose relative paths
@@ -11,7 +11,7 @@ match the supplied pattern, and prints a CSV with path,size,modifiedAt columns.
 
 Options
   -r, --root <path>          Root directory to start the scan (required)
-  -p, --pattern <pattern>    Pattern to match against repo-relative paths (required)
+  -p, --pattern <pattern>    Pattern to match against repo-relative paths (default: match all)
   -t, --types <types>        Comma-separated filter for file groups: ts, md, all (default: all)
       --regex                Treat the pattern as a JavaScript regular expression
       --case-sensitive       Match pattern using case-sensitive comparisons (default: case-insensitive)
@@ -24,8 +24,8 @@ Examples
 `;
 
 const TYPE_GROUPS = {
-  ts: ['.ts', '.tsx', '.cts', '.mts'],
-  md: ['.md'],
+  ts: [".ts", ".tsx", ".cts", ".mts"],
+  md: [".md"],
 };
 
 const args = process.argv.slice(2);
@@ -33,7 +33,7 @@ const args = process.argv.slice(2);
 const options = {
   root: null,
   pattern: null,
-  types: 'all',
+  types: "all",
   useRegex: false,
   caseSensitive: false,
   showHelp: false,
@@ -52,33 +52,33 @@ for (let index = 0; index < args.length; index += 1) {
   const token = args[index];
 
   switch (token) {
-    case '-h':
-    case '--help':
+    case "-h":
+    case "--help":
       options.showHelp = true;
       break;
-    case '-r':
-    case '--root':
+    case "-r":
+    case "--root":
       options.root = popValue(index, token);
       index += 1;
       break;
-    case '-p':
-    case '--pattern':
+    case "-p":
+    case "--pattern":
       options.pattern = popValue(index, token);
       index += 1;
       break;
-    case '-t':
-    case '--types':
+    case "-t":
+    case "--types":
       options.types = popValue(index, token);
       index += 1;
       break;
-    case '--regex':
+    case "--regex":
       options.useRegex = true;
       break;
-    case '--case-sensitive':
+    case "--case-sensitive":
       options.caseSensitive = true;
       break;
     default:
-      if (token.startsWith('-')) {
+      if (token.startsWith("-")) {
         console.error(`❌ Unknown option: ${token}`);
         console.error(USAGE.trimEnd());
         process.exit(1);
@@ -91,18 +91,22 @@ if (options.showHelp) {
   process.exit(0);
 }
 
-if (!options.root || !options.pattern) {
-  console.error('❌ Both --root and --pattern are required.');
+if (!options.root) {
+  console.error("❌ --root is required.");
   console.error(USAGE.trimEnd());
   process.exit(1);
 }
 
-const toPosix = (value) => value.replace(/\\/g, '/');
+const toPosix = (value) => value.replace(/\\/g, "/");
 
 const makePatternPredicate = (pattern, { useRegex, caseSensitive }) => {
+  if (!pattern) {
+    return () => true;
+  }
+
   if (useRegex) {
     try {
-      const flags = caseSensitive ? undefined : 'i';
+      const flags = caseSensitive ? undefined : "i";
       const matcher = new RegExp(pattern, flags);
       return (text) => matcher.test(text);
     } catch (error) {
@@ -124,11 +128,11 @@ const makeTypeFilter = (types) => {
   }
 
   const tokens = types
-    .split(',')
+    .split(",")
     .map((token) => token.trim().toLowerCase())
     .filter((token) => token.length > 0);
 
-  if (tokens.length === 0 || tokens.includes('all')) {
+  if (tokens.length === 0 || tokens.includes("all")) {
     return null;
   }
 
@@ -147,15 +151,15 @@ const makeTypeFilter = (types) => {
   if (unknown.length > 0) {
     console.error(
       `❌ Unsupported type(s): ${unknown.join(
-        ', ',
-      )}. Allowed values: ${Object.keys(TYPE_GROUPS).join(', ')}, all`,
+        ", ",
+      )}. Allowed values: ${Object.keys(TYPE_GROUPS).join(", ")}, all`,
     );
     process.exit(1);
   }
 
   return (filePath) => {
     const ext = extname(filePath).toLowerCase();
-    if (ext === '.ts' && filePath.endsWith('.d.ts')) {
+    if (ext === ".ts" && filePath.endsWith(".d.ts")) {
       return false;
     }
     return allowedExtensions.has(ext);
@@ -163,7 +167,7 @@ const makeTypeFilter = (types) => {
 };
 
 const escapeCsv = (value) => {
-  const stringValue = String(value ?? '');
+  const stringValue = String(value ?? "");
   if (/[",\n]/.test(stringValue)) {
     return `"${stringValue.replace(/"/g, '""')}"`;
   }
@@ -188,7 +192,7 @@ const main = async () => {
     process.exit(1);
   }
 
-  const predicate = makePatternPredicate(options.pattern, {
+  const predicate = makePatternPredicate(options.pattern ?? "", {
     useRegex: options.useRegex,
     caseSensitive: options.caseSensitive,
   });
@@ -208,7 +212,7 @@ const main = async () => {
     }
 
     for (const entry of entries) {
-      if (entry.name === '.' || entry.name === '..') {
+      if (entry.name === "." || entry.name === "..") {
         continue;
       }
 
@@ -257,7 +261,7 @@ const main = async () => {
 
   results.sort((a, b) => a.path.localeCompare(b.path));
 
-  console.log('path,size,modifiedAt');
+  console.log("path,size,modifiedAt");
   for (const record of results) {
     console.log(
       `${escapeCsv(record.path)},${escapeCsv(record.size)},${escapeCsv(record.modifiedAt)}`,
@@ -266,6 +270,6 @@ const main = async () => {
 };
 
 main().catch((error) => {
-  console.error('❌ Unexpected error:', error);
+  console.error("❌ Unexpected error:", error);
   process.exit(1);
 });

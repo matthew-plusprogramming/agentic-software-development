@@ -13,13 +13,13 @@ Memory Bank
 Procedural vs Declarative
 
 - Declarative knowledge (facts, mappings, invariants) is recorded in canonical files under `agents/memory-bank/*` and does not change workflow definitions.
-- Procedural learnings (repeatable steps) are captured as patterns in `agents/memory-bank/system.patterns.md`. High-importance procedural patterns may modify/create workflows per the synthesis rule.
+- Procedural learnings (repeatable steps) are captured as patterns in files under `agents/workflows/*`
 
 Retrieval Policy
 
 - Identify task type: bug | feature | refactor | ops | etc.
-- Always include: `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/progress.log.md`, and `agents/memory-bank/active.context.md`.
-- Gate optional files by substance: include `agents/memory-bank/tech.context.md` and `agents/memory-bank/system.patterns.md` only when they contain substantive, non-placeholder content (more than headings/TBDs). Include relevant ADRs under `agents/memory-bank/decisions/` when directly applicable.
+- Always include: `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, recent `agents/memory-bank/active.context.md`.
+- Gate optional files by substance: include `agents/memory-bank/tech.context.md` only when they contain substantive, non-placeholder content (more than headings/TBDs). Include relevant ADRs under `agents/memory-bank/decisions/` when directly applicable.
 - File discovery & content retrieval: rely on `node agents/scripts/list-files-recursively.mjs` to surface candidate paths, `node agents/scripts/smart-file-query.mjs` for scoped searches, and `node agents/scripts/read-files.mjs` (default numbered text output, `--json` when automation requires it) when you need ordered contents from multiple files; avoid falling back to generic shell defaults unless these scripts cannot satisfy the need.
 - Capture context in a single pass: the helper scripts now emit line numbers, so take notes the first time you load a file and only re-read when the file genuinely changes; repeated pulls violate workflow discipline and waste cycles.
 - For system-impacting changes, open an ADR stub using `agents/memory-bank/decisions/ADR-0000-template.md`.
