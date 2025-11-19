@@ -8,8 +8,8 @@ Prefer the purpose-built discovery scripts (`list-files-recursively.mjs`, `smart
 
 - `node agents/scripts/load-context.mjs [--include-optional] [--list]`
   Prints required Memory Bank + workflow files for the current task with numbered lines to encourage single-pass note taking. Add `--include-optional` to pull in supplemental context and `--list` to show paths without content.
-- `node agents/scripts/append-memory-entry.mjs --target <active|progress> [...]`
-  Appends formatted reflections to `active.context.md`. Supply `--plan`, `--build`, `--verify` for active context entries.
+- `node agents/scripts/append-memory-entry.mjs --plan "<text>" [--build "<text>"] [--verify "<text>"] [--dry-run]`
+  Appends formatted reflections to `agents/ephemeral/active.context.md`; supply any combination of `--plan`, `--build`, or `--verify` (at least one is required).
 
 ## Search & Discovery
 
