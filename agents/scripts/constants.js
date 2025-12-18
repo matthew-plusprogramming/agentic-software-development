@@ -12,10 +12,6 @@ export const DOC_DIRS = ['agents/memory-bank', 'agents/workflows'];
 // i.e. these should be the paths where all your code is located (e.g. 'src/')
 export const PATH_PREFIXES = ['apps/', 'packages/', 'cdk/', 'agents/'];
 
-// Directories considered for drift checks between the stamped SHA and HEAD.
-// i.e. these are probably the same as above (e.g. 'src/', 'packages/')
-export const DRIFT_TRACKED_DIRS = ['apps', 'cdk', 'packages'];
-
 // Root-level files that may be referenced inside memory bank markdown.
 export const ROOT_BASENAMES = new Set([
   'README.md',

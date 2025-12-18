@@ -16,7 +16,7 @@ Constraints
 Environment
 
 - Default entrypoint workflow: `agents/workflows/default.workflow.md`.
-- Memory validation scripts: `npm run memory:validate`, `npm run memory:drift`.
+- Memory validation script: `npm run memory:validate`.
 
 Entrypoints
 
@@ -37,4 +37,4 @@ Codebase Map
 
 Tech Stack Details
 
-- Node.js scripts validate memory and drift. Markdown files drive the agent’s multi-phase execution.
+- Node.js scripts validate memory references. Markdown files drive the agent’s multi-phase execution.
