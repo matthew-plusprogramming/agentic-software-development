@@ -9,8 +9,8 @@ Intent
 Global Prompts
 
 - Retrieval & context discipline: Follow the Retrieval Policy in `agents/memory-bank.md` for required discovery tooling, numbered text defaults, and the single-pass note-taking rule; treat that section as canonical for file inspection guidance.
-- Task specs: Each task gets its own spec under `agents/ephemeral/task-specs/` (Requirements, Design, Implementation Planning, Execution). Create one via `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` and keep it updated.
-- Reflection note: After each phase, add a reflection to `agents/ephemeral/active.context.md` using `node agents/scripts/append-memory-entry.mjs`.
+- Task specs: Each task gets its own spec (Requirements, Design, Implementation Planning, Execution). Create one via `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` and keep it updated.
+- Reflection note: After each phase, log a reflection in the task spec and record approvals in the Decision & Work Log.
 - Markdown standards: See `AGENTS.md`.
 
 Phase: requirements
@@ -24,7 +24,7 @@ Phase: requirements
   - Map impacted components and critical paths; note retrieval sources consulted.
   - Identify interfaces/contracts and candidate files/tests to touch.
   - If system-impacting, open ADR stub.
-- Outputs: Task spec Requirements section filled (EARS + acceptance criteria, non-goals, constraints/risks, invariants, interfaces/files/tests to touch); updated `agents/ephemeral/active.context.md` reflection.
+- Outputs: Task spec Requirements section filled (EARS + acceptance criteria, non-goals, constraints/risks, invariants, interfaces/files/tests to touch); reflection logged in the task spec.
 - Done_when: Scope and criteria are clear; risks/constraints logged; invariants confirmed.
 - Gates: EARS stories + acceptance criteria are specific/testable; non-goals captured; risks noted; invariants stated.
 - Next: design

@@ -9,9 +9,9 @@ Prefer the purpose-built discovery scripts (`list-files-recursively.mjs`, `smart
 - `node agents/scripts/load-context.mjs [--include-optional] [--list]`
   Prints required Memory Bank + workflow files for the current task with numbered lines to encourage single-pass note taking. Add `--include-optional` to pull in supplemental context and `--list` to show paths without content.
 - `node agents/scripts/append-memory-entry.mjs --requirements "<text>" [--design "<text>"] [--implementation "<text>"] [--execution "<text>"] [--dry-run]`
-  Appends formatted reflections (Requirements, Design, Implementation Planning, Execution) to `agents/ephemeral/active.context.md`; at least one flag is required.
+  Appends formatted reflections (Requirements, Design, Implementation Planning, Execution) to the active task index (legacy); at least one flag is required.
 - `node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [--title "<text>"] [--date "<YYYY-MM-DD>"]`
-  Creates a per-task spec under `agents/ephemeral/task-specs/` and refreshes the active context index (date defaults to today UTC).
+  Creates a per-task spec and refreshes the active task index (date defaults to today UTC).
 
 ## Search & Discovery
 

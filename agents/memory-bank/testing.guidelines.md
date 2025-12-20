@@ -14,7 +14,12 @@ last_reviewed: 2025-10-21
   - Filesystem: Use temporary directories or in-memory adapters (e.g., `memfs`) to avoid touching the real FS; mock only when the abstraction is too thin to fake.
   - Clock/Time: Control time with `jest.useFakeTimers()` and `jest.setSystemTime(...)`; expose clocks as injectable utilities when production code needs current time.
   - Randomness/UUID: Inject RNG/UUID generators; stub deterministic values inside tests.
-  - Environment: Set and reset `process.env` keys in `beforeEach`/`afterEach` helpers to keep tests isolated.
+- Environment: Set and reset `process.env` keys in `beforeEach`/`afterEach` helpers to keep tests isolated.
+
+## Spec-Based Evidence
+
+- For one-off spec work, map each test to a specific acceptance criterion in the spec.
+- Record test evidence in the spec Execution log so approvals can review outcomes against criteria.
 
 ## Reusable Utilities
 

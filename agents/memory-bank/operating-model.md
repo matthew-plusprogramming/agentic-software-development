@@ -7,8 +7,8 @@ last_reviewed: 2025-11-26
 ## Overview
 
 - Default phases: Requirements → Design → Implementation Planning → Execution.
-- Every task has a Task Spec in `agents/ephemeral/task-specs/` that holds these phases; it is created with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]`.
-- Reflections are appended to `agents/ephemeral/active.context.md` after each phase using `node agents/scripts/append-memory-entry.mjs`.
+- Every task has a Task Spec under `agents/ephemeral/task-specs/` that holds these phases; it is created with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]`.
+- Reflections are recorded in the task spec after each phase, with approvals logged in the Decision & Work Log.
 - Canonical updates live in `agents/memory-bank/**`; validate via `npm run memory:validate` (or `npm run agent:finalize`) after stable changes.
 
 ## Phase Expectations
@@ -30,6 +30,6 @@ last_reviewed: 2025-11-26
 ## Artifacts & Tools
 
 - Task Specs: created via `reset-active-context.mjs`; named `<YYYY-MM-DD>-<slug>.md`; include all four phases plus execution log and evidence.
-- Active Context: `agents/ephemeral/active.context.md` indexes the current Task Spec and holds reflections.
+- Active Task Index: maintained by `reset-active-context.mjs` for tracking the current Task Spec.
 - Retrieval: use `agents/scripts/load-context.mjs` to pull required context; follow `agents/memory-bank.md#retrieval-policy` for discovery discipline.
 - Validation: `npm run agent:finalize` runs formatting, validation, and quality checks before completion.

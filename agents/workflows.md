@@ -9,10 +9,9 @@ Usage
 
 - Open the workflow file and start at the current phase.
 - Follow the checklist, produce outputs, and update the phase state in the file.
-- After each phase, log a 3-line reflection to `agents/ephemeral/active.context.md`.
+- After each phase, log a short reflection in the task spec and record approvals in the Decision & Work Log.
 - Reference `agents/tools.md` for script helpers that support each phase.
-  - Use `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` to capture reflections.
-  - Retrieval tooling and single-pass rules live in `agents/memory-bank.md#retrieval-policy`; defer to that section for discovery commands and numbered output expectations.
+- Retrieval tooling and single-pass rules live in `agents/memory-bank.md#retrieval-policy`; defer to that section for discovery commands and numbered output expectations.
 
 Policies
 

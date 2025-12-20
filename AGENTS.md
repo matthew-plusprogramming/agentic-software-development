@@ -7,6 +7,16 @@ Before modifying code, load required context with `node agents/scripts/load-cont
 - Tool catalog: `agents/tools.md`
 - Retrieval policy: `agents/memory-bank.md#retrieval-policy` is the canonical source for discovery tooling, one-pass note taking, and context tiers.
 
+## 🧭 Mode Selection (Orchestrator vs One-off)
+
+- If the user does not specify a mode, ask them to choose orchestrator or one-off before proceeding.
+- Orchestrator: follow `agents/workflows/orchestrator.workflow.md` and the spec-first pipeline in `agents/memory-bank/spec-orchestration.design.md`.
+- One-off: ask whether the request is one-off vibe or one-off spec.
+- One-off vibe: no spec, small scope only; follow `agents/workflows/oneoff.workflow.md` and recommend switching modes if scope grows.
+- One-off spec: create a single spec using the required section schema, log approvals in the Decision & Work Log, then execute via `agents/workflows/default.workflow.md`.
+- Use user selection as the only threshold; do not infer mode from scope or complexity.
+- Reference `agents/workflows/spec-author.workflow.md` or `agents/workflows/implementer.workflow.md` when assigned a specific spec role.
+
 ## 🔑 Memory Bank
 
 The Memory Bank provides durable, structured context for all tasks.
@@ -25,8 +35,8 @@ Update Requirements (per task)
 
 Convenience helpers
 
-- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]` creates a new per-task spec under `agents/ephemeral/task-specs/` and refreshes `agents/ephemeral/active.context.md`.
-- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` appends a reflection block to `agents/ephemeral/active.context.md` (at least one flag required).
+- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]` creates a new per-task spec and refreshes the active task index.
+- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` appends a reflection block to the active task index (legacy; prefer logging reflections in the task spec).
 
 ## 🧭 Workflow Process List
 

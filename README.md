@@ -16,14 +16,14 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 1. Read [`AGENTS.md`](AGENTS.md) for the complete repo-native agent obligations and tooling overview.
 2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files.
 3. Create a per-task spec with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` to scaffold Requirements/Design/Implementation Planning/Execution.
-4. Follow the current phase checklist in `agents/workflows/default.workflow.md` and log reflections after every phase via `node agents/scripts/append-memory-entry.mjs`.
+4. Follow the current phase checklist in `agents/workflows/default.workflow.md` and log reflections in the task spec (record approvals in the Decision & Work Log).
 
 ## Working a Task (Requirements → Design → Implementation Planning → Execution)
 - **Requirements**: author EARS-format user stories + acceptance criteria, list non-goals, constraints/risks, and invariants; record them in the task spec.
 - **Design**: capture architecture notes, Mermaid sequence diagrams for primary flows, interface contracts, and edge/failure behaviors in the task spec.
 - **Implementation Planning**: break down work into discrete tasks with outcomes/dependencies, map tests to EARS criteria, and ensure traceability.
 - **Execution**: track progress against tasks, refine the spec as reality changes, gather evidence/tests, and validate outcomes.
-- Append reflections for phases in `agents/ephemeral/active.context.md` using the append script.
+- Record phase reflections in the task spec and approvals in the Decision & Work Log.
 - When Memory Bank canonicals change, run `npm run memory:validate` (or `npm run agent:finalize`) before shipping.
 
 ## Repository Layout
@@ -39,8 +39,8 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 ## Commands & Scripts
 - `node agents/scripts/load-context.mjs`: Print the required Memory Bank/workflow files for the current task.
 - `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers.
-- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec and refresh the active context index.
-- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."`: Append reflections to `agents/ephemeral/active.context.md` (at least one flag required).
+- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec and refresh the active task index.
+- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."`: Append reflections to the active task index (legacy; prefer logging in the task spec).
 - `npm run memory:validate`: Ensure referenced paths in Memory Bank files exist.
 - `npm run phase:check`: Run the lint placeholder (`npm run lint:fix`) and repo quality checks (`node agents/scripts/check-code-quality.mjs`).
 - `npm run agent:finalize`: Format markdown, validate the Memory Bank, and run the phase check in one pass.

@@ -39,4 +39,4 @@ last_reviewed: 2025-11-26
 
 - Keep traceability: link each acceptance criterion to tests or evidence in Execution.
 - Update the spec incrementally as decisions change; avoid drift between plan and reality.
-- Use reflections (`append-memory-entry.mjs`) after each phase to summarize decisions and risks.
+- After each phase, capture a brief reflection in the task spec and log approvals in the Decision & Work Log.
