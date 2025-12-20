@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 
-const ACTIVE_CONTEXT_PATH = 'agents/ephemeral/active.context.md';
+const ACTIVE_INDEX_PATH = 'agents/ephemeral/active.context.md';
 const TASK_SPECS_DIR = 'agents/ephemeral/task-specs';
 
 const USAGE = `Usage: node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [options]
 
 Create a new per-task spec (Requirements, Design, Implementation Planning, Execution)
-and refresh the active context index.
+and refresh the active task index.
 
 Options
   --slug "<task-slug>"     Required slug used in the task spec filename
@@ -142,13 +142,13 @@ sequenceDiagram
 - Follow-ups:
 `;
 
-const buildActiveContext = ({ date, specPath, title, slug, legacyReflections }) => {
+const buildActiveIndex = ({ date, specPath, title, slug }) => {
   const lines = [];
   lines.push('---');
   lines.push(`last_reviewed: ${date}`);
   lines.push('---');
   lines.push('');
-  lines.push('# Active Context');
+  lines.push('# Active Task Index');
   lines.push('');
   lines.push('## Current Task Spec');
   lines.push(`- Title: ${title}`);
@@ -160,85 +160,9 @@ const buildActiveContext = ({ date, specPath, title, slug, legacyReflections }) 
   lines.push('## Task Spec Index');
   lines.push(`- Current: ${specPath}`);
   lines.push('- Archive: (add prior task specs here)');
-  lines.push('');
-  lines.push('## Reflection');
-  lines.push('- YYYY-MM-DD — Requirements: ...');
-  lines.push('  Design: ...');
-  lines.push('  Implementation Planning: ...');
-  lines.push('  Execution: ...');
-
-  if (legacyReflections) {
-    lines.push('');
-    lines.push('## Legacy Reflections');
-    lines.push(legacyReflections.trim());
-  }
 
   lines.push('');
   return lines.join('\n');
-};
-
-const extractLegacyReflections = async (absolutePath) => {
-  try {
-    const existing = await readFile(absolutePath, 'utf8');
-    const marker = '## Reflection';
-    const index = existing.indexOf(marker);
-    if (index === -1) {
-      return null;
-    }
-    return existing.slice(index);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return null;
-    }
-    throw error;
-  }
-};
-
-const normalizeLegacyReflections = (content) => {
-  if (!content) {
-    return null;
-  }
-
-  const trimmed = content.trim();
-  if (!trimmed) {
-    return null;
-  }
-
-  const filtered = trimmed
-    .split('\n')
-    .filter((line) => line.trim().toLowerCase() !== '## legacy reflections');
-
-  if (filtered[0] && filtered[0].trim().toLowerCase() === '## reflection') {
-    filtered.shift();
-  }
-
-  if (
-    filtered[0] &&
-    filtered[0].includes('YYYY-MM-DD — Requirements: ...') &&
-    filtered[1] &&
-    filtered[2] &&
-    filtered[3]
-  ) {
-    filtered.splice(0, 4);
-    while (filtered[0] === '') {
-      filtered.shift();
-    }
-  }
-
-  const withoutPlaceholders = filtered.filter(
-    (line) =>
-      !line.includes('YYYY-MM-DD — Requirements: ...') &&
-      line.trim() !== 'Design: ...' &&
-      line.trim() !== 'Implementation Planning: ...' &&
-      line.trim() !== 'Execution: ...',
-  );
-
-  while (withoutPlaceholders[0] === '') {
-    withoutPlaceholders.shift();
-  }
-
-  const normalized = withoutPlaceholders.join('\n').trim();
-  return normalized.length > 0 ? normalized : null;
 };
 
 const main = async () => {
@@ -247,11 +171,8 @@ const main = async () => {
   const taskSpecFile = `${reviewDate}-${options.slug}.md`;
   const taskSpecPath = `${TASK_SPECS_DIR}/${taskSpecFile}`;
 
-  const absoluteActiveContextPath = resolve(process.cwd(), ACTIVE_CONTEXT_PATH);
+  const absoluteActiveIndexPath = resolve(process.cwd(), ACTIVE_INDEX_PATH);
   const absoluteTaskSpecPath = resolve(process.cwd(), taskSpecPath);
-
-  const rawLegacyReflections = await extractLegacyReflections(absoluteActiveContextPath);
-  const legacyReflections = normalizeLegacyReflections(rawLegacyReflections);
 
   const taskSpecContent = buildTaskSpecTemplate({
     title,
@@ -259,15 +180,14 @@ const main = async () => {
     date: reviewDate,
   });
 
-  const activeContextContent = buildActiveContext({
+  const activeIndexContent = buildActiveIndex({
     date: reviewDate,
     specPath: taskSpecPath,
     title,
     slug: options.slug,
-    legacyReflections,
   });
 
-  await mkdir(dirname(absoluteActiveContextPath), { recursive: true });
+  await mkdir(dirname(absoluteActiveIndexPath), { recursive: true });
   await mkdir(dirname(absoluteTaskSpecPath), { recursive: true });
 
   const taskSpecExists = await access(absoluteTaskSpecPath)
@@ -284,12 +204,12 @@ const main = async () => {
     console.log(`ℹ️  Task spec already exists at ${taskSpecPath}; left unchanged.`);
   }
 
-  await writeFile(absoluteActiveContextPath, activeContextContent, 'utf8');
-  console.log(`✅ Reset ${ACTIVE_CONTEXT_PATH} (last_reviewed: ${reviewDate})`);
+  await writeFile(absoluteActiveIndexPath, activeIndexContent, 'utf8');
+  console.log(`✅ Reset ${ACTIVE_INDEX_PATH} (last_reviewed: ${reviewDate})`);
 };
 
 main().catch((error) => {
-  console.error('❌ Failed to reset the active context.');
+  console.error('❌ Failed to reset the active task index.');
   console.error(error);
   process.exit(1);
 });

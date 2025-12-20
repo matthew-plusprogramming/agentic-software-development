@@ -91,3 +91,4 @@ sequenceDiagram
 
 - Decision: Orchestrator must attach gate report summary to the Decision & Work Log.
 - Approval: Pending tooling design review.
+- Work Log: Deprecated append-memory-entry, trimmed the active task index to metadata only, and updated load-context to include the current task spec.

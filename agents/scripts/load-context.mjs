@@ -24,9 +24,8 @@ const includeOptional =
   args.includes('-o') || args.includes('--include-optional');
 const listOnly = args.includes('-l') || args.includes('--list');
 
-const ACTIVE_CONTEXT_PATH = 'agents/ephemeral/active.context.md';
-
-const alwaysInclude = [
+const ACTIVE_INDEX_PATH = 'agents/ephemeral/active.context.md';
+const ALWAYS_INCLUDE = [
   'agents/memory-bank.md',
   'agents/workflows.md',
   'agents/tools.md',
@@ -34,15 +33,46 @@ const alwaysInclude = [
   'agents/memory-bank/operating-model.md',
   'agents/memory-bank/task-spec.guide.md',
   'agents/memory-bank/project.brief.md',
-  ACTIVE_CONTEXT_PATH,
 ];
 
 const optional = ['agents/memory-bank/tech.context.md'];
 
 const root = process.cwd();
 
+const resolveCurrentTaskSpecPath = () => {
+  const absoluteIndexPath = resolve(root, ACTIVE_INDEX_PATH);
+
+  if (!existsSync(absoluteIndexPath)) {
+    console.warn(
+      `⚠️  Missing file: ${ACTIVE_INDEX_PATH}. Run "node agents/scripts/reset-active-context.mjs" to create a task spec.`,
+    );
+    return null;
+  }
+
+  try {
+    const content = readFileSync(absoluteIndexPath, 'utf8');
+    const pathMatch = content.match(/^- Path:\s*(.+)$/m);
+    const currentMatch = content.match(/^- Current:\s*(.+)$/m);
+    const candidate = pathMatch?.[1] ?? currentMatch?.[1];
+    if (!candidate) {
+      console.warn(
+        `⚠️  Could not resolve current task spec from ${ACTIVE_INDEX_PATH}.`,
+      );
+      return null;
+    }
+    return candidate.trim();
+  } catch (error) {
+    console.warn(
+      `⚠️  Failed to read ${ACTIVE_INDEX_PATH}: ${error.message}`,
+    );
+    return null;
+  }
+};
+
 const collectPaths = () => {
-  return includeOptional ? [...alwaysInclude, ...optional] : alwaysInclude;
+  const currentTaskSpec = resolveCurrentTaskSpecPath();
+  const base = currentTaskSpec ? [...ALWAYS_INCLUDE, currentTaskSpec] : ALWAYS_INCLUDE;
+  return includeOptional ? [...base, ...optional] : base;
 };
 
 const formatWithLineNumbers = (content) => {
@@ -66,11 +96,7 @@ const readFileSafely = (relativePath) => {
   const absolutePath = resolve(root, relativePath);
 
   if (!existsSync(absolutePath)) {
-    const missingMessage =
-      relativePath === ACTIVE_CONTEXT_PATH
-        ? `⚠️  Missing file: ${relativePath}. Run "node agents/scripts/reset-active-context.mjs" to create the template.`
-        : `⚠️  Missing file: ${relativePath}`;
-    console.warn(missingMessage);
+    console.warn(`⚠️  Missing file: ${relativePath}`);
     return null;
   }
 

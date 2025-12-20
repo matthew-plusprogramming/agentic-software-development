@@ -36,7 +36,7 @@ Update Requirements (per task)
 Convenience helpers
 
 - `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]` creates a new per-task spec and refreshes the active task index.
-- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` appends a reflection block to the active task index (legacy; prefer logging reflections in the task spec).
+- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` is deprecated; it prints a reflection entry for manual copy into the task spec.
 
 ## 🧭 Workflow Process List
 

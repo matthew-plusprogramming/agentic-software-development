@@ -40,7 +40,7 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 - `node agents/scripts/load-context.mjs`: Print the required Memory Bank/workflow files for the current task.
 - `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers.
 - `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec and refresh the active task index.
-- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."`: Append reflections to the active task index (legacy; prefer logging in the task spec).
+- `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."`: Deprecated; prints a reflection entry for manual copy into the task spec.
 - `npm run memory:validate`: Ensure referenced paths in Memory Bank files exist.
 - `npm run phase:check`: Run the lint placeholder (`npm run lint:fix`) and repo quality checks (`node agents/scripts/check-code-quality.mjs`).
 - `npm run agent:finalize`: Format markdown, validate the Memory Bank, and run the phase check in one pass.
