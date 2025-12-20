@@ -34,6 +34,7 @@ Tooling ensures the spec-complete gates are enforceable. Validation and merge sc
 - CLI interfaces shall accept input paths, registry path, and output path.
 - Tooling shall restrict writes to `agents/specs/` to avoid unsafe output paths.
 - Tooling guidance shall remove references to `agents/ephemeral` scripts and focus on spec-first tooling.
+- `npm run agent:finalize` shall remain the default completion gate when an agent finishes a task.
 
 ## Core Flows
 
@@ -92,3 +93,4 @@ sequenceDiagram
 - Decision: Orchestrator must attach gate report summary to the Decision & Work Log.
 - Approval: Pending tooling design review.
 - Work Log: Deprecated append-memory-entry, trimmed the active task index to metadata only, and updated load-context to include the current task spec.
+- Work Log: Recorded `npm run agent:finalize` as the default completion gate for completed tasks.

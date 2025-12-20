@@ -19,7 +19,7 @@ User-directed mode selection is the entrypoint for the spec-first orchestration 
 - Goals:
   - Provide a clear decision tree for orchestrator vs one-off.
   - Explain one-off vibe vs one-off spec paths, including approvals required for specs.
-  - Preserve the current default workflow for one-off spec execution.
+  - Preserve the renamed one-off workflow (formerly `default.workflow.md`) for one-off spec execution.
 - Non-goals:
   - Implement orchestration runtime or automation scripts.
   - Modify product feature requirements outside the agent system.
@@ -37,7 +37,7 @@ User-directed mode selection is the entrypoint for the spec-first orchestration 
 
 - User selects orchestrator mode; orchestration proceeds through ProblemBrief, workstream specs, and MasterSpec gates.
 - User selects one-off mode; agent asks for vibe vs spec and proceeds accordingly.
-- One-off spec path uses the default workflow after spec approval.
+- One-off spec path uses the one-off workflow (renamed from `default.workflow.md`) after spec approval.
 
 ## Sequence Diagram(s)
 
@@ -93,3 +93,4 @@ sequenceDiagram
 - Approval: Pending confirmation once guidance updates are reviewed.
 - Work Log: Updated AGENTS and Memory Bank guidance to reflect mode selection, workflow references, and Decision & Work Log approvals.
 - Work Log: Aligned workflow and guidance docs to log reflections in task specs and avoid active context references.
+- Work Log: Noted one-off workflow rename from `default.workflow.md` for one-off spec guidance.
