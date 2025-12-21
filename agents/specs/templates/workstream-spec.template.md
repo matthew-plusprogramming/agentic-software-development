@@ -51,6 +51,8 @@ sequenceDiagram
 ## Additional considerations
 
 - Best-practices references (if applicable): `agents/memory-bank/best-practices/...`
+- Documentation updates (user/dev/runbook/README) and target files.
+- Memory Bank updates (which `agents/memory-bank/*` files and why).
 - ...
 
 ## Task List
