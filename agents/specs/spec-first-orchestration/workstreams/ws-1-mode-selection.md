@@ -104,3 +104,4 @@ sequenceDiagram
 - Work Log: Renamed the default workflow to `agents/workflows/oneoff.workflow.md` for one-off spec guidance.
 - Work Log: Added Task List section aligned to Requirements and Design.
 - Work Log: Split one-off workflow into overview + spec/vibe files and updated references.
+- Work Log: Updated top-level guidance and testing guidelines to reflect spec-first mode selection and evidence logging.

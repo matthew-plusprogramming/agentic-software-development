@@ -18,8 +18,8 @@ last_reviewed: 2025-10-21
 
 ## Spec-Based Evidence
 
-- For one-off spec work, map each test to a specific acceptance criterion in the spec.
-- Record test evidence in the spec Execution log so approvals can review outcomes against criteria.
+- For spec-first work (one-off spec, workstream specs, or MasterSpec-driven implementation), map each test to a specific acceptance criterion in the relevant spec.
+- Record test evidence in the spec Execution log (and gate reports/Decision & Work Log when applicable) so approvals can review outcomes against criteria.
 
 ## Reusable Utilities
 
