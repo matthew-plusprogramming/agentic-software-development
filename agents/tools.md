@@ -13,6 +13,15 @@ Prefer the purpose-built discovery scripts (`list-files-recursively.mjs`, `smart
 - `node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [--title "<text>"] [--date "<YYYY-MM-DD>"]`
   Creates a per-task spec and refreshes the active task index (date defaults to today UTC).
 
+## Spec Tooling
+
+- `node agents/scripts/spec-validate.mjs --specs "<path[,path...]>" [--root <path>] [--registry <path>] [--allow-empty]`
+  Validates spec front matter, required sections, and contract registry references.
+- `node agents/scripts/spec-merge.mjs --specs "<path[,path...]>" --output <path> [--report <path>] [--registry <path>]`
+  Generates a MasterSpec and gate report from workstream specs.
+- `npm run spec:finalize`
+  Runs spec validation and Memory Bank validation in one pass.
+
 ## Search & Discovery
 
 - `node agents/scripts/smart-file-query.mjs --regex "<pattern>" [--glob ...] [--contextLines ...] [--includeAllContent] [--json]`

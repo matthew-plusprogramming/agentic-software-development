@@ -14,6 +14,9 @@
     "format:markdown": "prettier --write \"agents/**/*.md\"",
     "memory:validate": "node agents/scripts/validate-memory-bank.mjs",
     "phase:check": "npm run lint:fix && node agents/scripts/check-code-quality.mjs",
-    "agent:finalize": "npm run format:markdown && npm run memory:validate && npm run phase:check"
+    "agent:finalize": "npm run format:markdown && npm run memory:validate && npm run phase:check",
+    "spec:validate": "node agents/scripts/spec-validate.mjs --root agents/specs --registry agents/contracts/registry.yaml --allow-empty",
+    "spec:merge": "node agents/scripts/spec-merge.mjs",
+    "spec:finalize": "npm run spec:validate && npm run memory:validate"
   }
 }

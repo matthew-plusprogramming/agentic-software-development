@@ -104,3 +104,4 @@ sequenceDiagram
 - Work Log: Deprecated append-memory-entry, trimmed the active task index to metadata only, and updated load-context to include the current task spec.
 - Work Log: Recorded `npm run agent:finalize` as the default completion gate for completed tasks.
 - Work Log: Added Task List section aligned to Requirements and Design.
+- Work Log: Implemented spec-validate/spec-merge tooling, added spec scripts, and documented spec tooling usage.
