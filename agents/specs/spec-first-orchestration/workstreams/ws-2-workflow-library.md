@@ -20,7 +20,7 @@ The workflow library is the operational backbone for spec-first orchestration. E
 - Goals:
   - Define orchestrator, spec-author, implementer, and one-off workflows with clear phase gates.
   - Encode the spec-first run-loop and handoffs across workflows.
-  - Preserve the one-off workflow (`agents/workflows/oneoff.workflow.md`) for one-off spec execution.
+  - Preserve the one-off spec workflow (`agents/workflows/oneoff-spec.workflow.md`) for one-off spec execution.
 - Non-goals:
   - Implement automation beyond documented steps.
   - Replace the existing one-off workflow for non-orchestrator tasks.
@@ -30,11 +30,11 @@ The workflow library is the operational backbone for spec-first orchestration. E
 - The orchestrator workflow shall define decomposition, spec assignment, merge, and spec-complete gates.
 - The spec-author workflow shall require the standard section schema and Decision & Work Log updates.
 - The implementer workflow shall gate execution on an approved MasterSpec.
-- The one-off workflow shall document vibe vs spec variants and their gates.
+- The one-off overview shall route to spec/vibe workflows and their gates.
 - The workflows shall reference spec validation and merge tooling where applicable.
 - The workflow library shall remove references to `agents/ephemeral` and log progress directly in specs.
 - The workflow library shall keep `npm run agent:finalize` as the default completion gate for finished tasks.
-- The one-off workflow shall live at `agents/workflows/oneoff.workflow.md` (renamed from the default workflow), with references updated.
+- The one-off overview shall live at `agents/workflows/oneoff.workflow.md`, with `agents/workflows/oneoff-spec.workflow.md` and `agents/workflows/oneoff-vibe.workflow.md` split out for spec/vibe paths.
 
 ## Core Flows
 
@@ -70,11 +70,11 @@ sequenceDiagram
 ## Existing Docs Audit
 
 - Update: `agents/workflows.md` to remove `agents/ephemeral` references and align usage with spec-first workflows.
-- Update: `agents/workflows/oneoff.workflow.md` references after the rename (optionally split into vibe/spec).
+- Update: `agents/workflows/oneoff.workflow.md` references and the new spec/vibe workflow links after the split.
 - Update: `agents/workflows/orchestrator.workflow.md` stub into a spec-first orchestration workflow.
 - Update: `agents/workflows/spec-author.workflow.md` stub into a spec-author workflow with required sections.
 - Update: `agents/workflows/implementer.workflow.md` stub into a spec-driven implementation workflow.
-- Update: `agents/workflows/oneoff.workflow.md` to cover vibe/spec handling (or split into separate files).
+- Update: `agents/workflows/oneoff.workflow.md` to route to the split spec/vibe workflows.
 - Update: `agents/workflows/templates/pattern.workflow.template.md` to align with spec-first and remove `agents/ephemeral` references.
 - Update: `agents/memory-bank/operating-model.md` to reflect spec-first phases and remove active context guidance.
 
@@ -84,7 +84,7 @@ sequenceDiagram
 
 ## Additional considerations
 
-- Preserve the one-off workflow content during the rename and reference it explicitly for one-off spec execution.
+- Preserve the one-off spec workflow content and reference it explicitly for one-off spec execution.
 - Ensure workflows call out approval logging requirements.
 
 ## Task List
@@ -92,7 +92,7 @@ sequenceDiagram
 - Draft orchestrator workflow with decomposition, spec assignment, merge, and spec-complete gates.
 - Draft spec-author workflow with required sections and Decision & Work Log updates.
 - Draft implementer workflow gated on approved MasterSpec.
-- Ensure `agents/workflows/oneoff.workflow.md` remains the one-off workflow (optionally split vibe/spec) and update references.
+- Ensure the one-off overview remains at `agents/workflows/oneoff.workflow.md`, split spec/vibe workflows exist, and references are updated.
 - Update workflow templates and usage docs to reflect the new workflow layout.
 - Validate updates with `npm run agent:finalize`.
 
@@ -111,3 +111,4 @@ sequenceDiagram
 - Approval: Pending workflow review.
 - Work Log: Recorded default completion gate (`npm run agent:finalize`) and the rename to `agents/workflows/oneoff.workflow.md`.
 - Work Log: Added Task List section aligned to Requirements and Design.
+- Work Log: Split one-off workflow into overview + spec/vibe files and updated references.

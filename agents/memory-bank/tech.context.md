@@ -15,12 +15,14 @@ Constraints
 
 Environment
 
-- One-off entrypoint workflow: `agents/workflows/oneoff.workflow.md`.
+- One-off entrypoint workflow: `agents/workflows/oneoff.workflow.md` (overview).
+- One-off spec workflow: `agents/workflows/oneoff-spec.workflow.md`.
+- One-off vibe workflow: `agents/workflows/oneoff-vibe.workflow.md`.
 - Memory validation script: `npm run memory:validate`.
 
 Entrypoints
 
-- Start with `agents/workflows/oneoff.workflow.md`.
+- Start with `agents/workflows/oneoff.workflow.md`, then follow the spec or vibe workflow based on mode.
 
 Where To Look First
 

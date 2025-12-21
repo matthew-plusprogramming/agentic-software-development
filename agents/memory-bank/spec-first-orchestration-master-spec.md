@@ -32,6 +32,8 @@ ProblemBrief: Implement the spec-first orchestration system across docs, workflo
 - `agents/workflows/spec-author.workflow.md`
 - `agents/workflows/implementer.workflow.md`
 - `agents/workflows/oneoff.workflow.md`
+- `agents/workflows/oneoff-spec.workflow.md`
+- `agents/workflows/oneoff-vibe.workflow.md`
 - `agents/specs/` (templates + per-task specs)
 - `agents/contracts/registry.yaml`
 - `agents/scripts/spec-validate.mjs`
@@ -77,7 +79,7 @@ Goals / Non-goals:
   Security (if applicable):
 - N/A.
   Additional considerations:
-- Keep one-off workflow intact for the one-off spec path.
+- Keep the one-off spec workflow intact for the one-off spec path.
   Testing:
 - `npm run agent:finalize` path validation; doc review.
   Open Questions:
@@ -92,7 +94,7 @@ Spec path: `agents/specs/spec-first-orchestration/workstreams/ws-2-workflow-libr
 Context: Expand the stub workflows to enforce the spec-first run-loop and handoffs.
 Goals / Non-goals:
 
-- Goals: Orchestrator, spec author, implementer, and one-off workflows define phases, inputs/outputs, and gates.
+- Goals: Orchestrator, spec author, implementer, and one-off workflows (overview/spec/vibe) define phases, inputs/outputs, and gates.
 - Non-goals: Implement automation beyond documented steps.
   Requirements:
 - Orchestrator workflow defines decomposition, spec assignments, merge, and spec-complete gates.

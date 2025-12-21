@@ -28,7 +28,7 @@ Define a spec-first orchestration model that turns high-level requests into para
 - Spec Author (Subagent): produces a workstream spec and required contracts; does not implement code.
 - Implementer: turns approved specs into code/tests and verifies acceptance criteria.
 - One-off Vibe: ships a small change without specs; uses only the system context and keeps scope tight.
-- One-off Spec: uses a single spec (one-off workflow style) and implements after approval; approvals are logged in Decision & Work Log.
+- One-off Spec: uses a single spec (one-off spec workflow) and implements after approval; approvals are logged in Decision & Work Log.
 
 ## Mode Selection (User-Directed)
 
@@ -222,9 +222,11 @@ Proposed workflow additions:
 - `<agents/workflows/orchestrator.workflow.md>` for multi-workstream orchestration.
 - `<agents/workflows/spec-author.workflow.md>` for subagent spec creation.
 - `<agents/workflows/implementer.workflow.md>` for spec-driven execution.
-- `<agents/workflows/oneoff.workflow.md>` for one-off (vibe or spec) tasks.
+- `<agents/workflows/oneoff.workflow.md>` for one-off routing and overview.
+- `<agents/workflows/oneoff-spec.workflow.md>` for one-off spec tasks.
+- `<agents/workflows/oneoff-vibe.workflow.md>` for one-off vibe tasks.
 
-Existing one-off workflow remains the baseline for implementation once specs are approved.
+One-off spec workflow remains the baseline for implementation once specs are approved.
 
 ## Artifacts and File Layout (Proposed)
 
@@ -234,6 +236,7 @@ Existing one-off workflow remains the baseline for implementation once specs are
 - `<agents/specs/<task>/master-spec.md>`
 - `<agents/contracts/registry.yaml>`
 - `<agents/contracts/**>` (OpenAPI, JSON Schema, SQL, proto)
+- `<agents/memory-bank/best-practices/**>` (tribal knowledge references)
 
 ## Automation Hooks (Proposed)
 

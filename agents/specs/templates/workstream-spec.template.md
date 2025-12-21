@@ -21,7 +21,8 @@ status: draft
 
 ## Requirements
 
-- ...
+- List atomic, testable requirements.
+  - ...
 
 ## Core Flows
 
@@ -54,7 +55,7 @@ sequenceDiagram
 
 ## Task List
 
-- Translate Requirements + Design into discrete tasks.
+- Translate Requirements + Design into discrete tasks with outcomes and dependencies.
 - ...
 
 ## Testing
@@ -69,3 +70,4 @@ sequenceDiagram
 
 - Decision:
 - Approval:
+- Work Log:

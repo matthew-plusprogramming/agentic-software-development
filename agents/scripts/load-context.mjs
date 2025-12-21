@@ -30,6 +30,8 @@ const ALWAYS_INCLUDE = [
   'agents/workflows.md',
   'agents/tools.md',
   'agents/workflows/oneoff.workflow.md',
+  'agents/workflows/oneoff-spec.workflow.md',
+  'agents/workflows/oneoff-vibe.workflow.md',
   'agents/memory-bank/operating-model.md',
   'agents/memory-bank/task-spec.guide.md',
   'agents/memory-bank/project.brief.md',

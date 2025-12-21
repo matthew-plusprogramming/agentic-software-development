@@ -128,3 +128,4 @@ sequenceDiagram
 - Decision: One-off spec uses the same section schema as workstream specs.
 - Approval: Pending template review.
 - Work Log: Added Task List as a required WorkstreamSpec section derived from Requirements and Design.
+- Work Log: Added ProblemBrief/MasterSpec templates, schema docs/files, best-practices library, and contract registry guidance.

@@ -19,7 +19,7 @@ User-directed mode selection is the entrypoint for the spec-first orchestration 
 - Goals:
   - Provide a clear decision tree for orchestrator vs one-off.
   - Explain one-off vibe vs one-off spec paths, including approvals required for specs.
-  - Preserve the one-off workflow (`agents/workflows/oneoff.workflow.md`) for one-off spec execution.
+  - Preserve the one-off spec workflow (`agents/workflows/oneoff-spec.workflow.md`) for one-off spec execution.
 - Non-goals:
   - Implement orchestration runtime or automation scripts.
   - Modify product feature requirements outside the agent system.
@@ -37,7 +37,7 @@ User-directed mode selection is the entrypoint for the spec-first orchestration 
 
 - User selects orchestrator mode; orchestration proceeds through ProblemBrief, workstream specs, and MasterSpec gates.
 - User selects one-off mode; agent asks for vibe vs spec and proceeds accordingly.
-- One-off spec path uses the one-off workflow (`agents/workflows/oneoff.workflow.md`) after spec approval.
+- One-off spec path uses the one-off spec workflow (`agents/workflows/oneoff-spec.workflow.md`) after spec approval.
 
 ## Sequence Diagram(s)
 
@@ -81,7 +81,7 @@ sequenceDiagram
 ## Task List
 
 - Draft the mode-selection decision tree and one-off vibe/spec guidance in top-level docs.
-- Reference the renamed one-off workflow and relevant orchestrator/spec-author/implementer workflows.
+- Reference the one-off overview plus the spec/vibe workflows alongside orchestrator/spec-author/implementer workflows.
 - Update Memory Bank guidance to remove ephemeral references and align approvals to the Decision & Work Log.
 - Update testing guidance to reference spec-based acceptance criteria and evidence.
 - Validate updates with `npm run agent:finalize`.
@@ -103,3 +103,4 @@ sequenceDiagram
 - Work Log: Aligned workflow and guidance docs to log reflections in task specs and avoid active context references.
 - Work Log: Renamed the default workflow to `agents/workflows/oneoff.workflow.md` for one-off spec guidance.
 - Work Log: Added Task List section aligned to Requirements and Design.
+- Work Log: Split one-off workflow into overview + spec/vibe files and updated references.

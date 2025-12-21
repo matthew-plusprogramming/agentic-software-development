@@ -2,8 +2,10 @@ Workflows
 
 It is very important you strictly follow the agent workflows.
 
-- One-off workflow: `agents/workflows/oneoff.workflow.md`
-- Purpose: drive the four-phase loop (Requirements → Design → Implementation Planning → Execution) with explicit inputs/outputs and gates.
+- One-off overview: `agents/workflows/oneoff.workflow.md`
+- One-off spec workflow: `agents/workflows/oneoff-spec.workflow.md`
+- One-off vibe workflow: `agents/workflows/oneoff-vibe.workflow.md`
+- Purpose: drive the one-off flow; spec follows the full four-phase loop with gates, vibe stays lightweight.
 
 Usage
 
