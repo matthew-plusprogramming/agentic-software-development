@@ -16,7 +16,7 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 1. Read [`AGENTS.md`](AGENTS.md) for the complete repo-native agent obligations and tooling overview.
 2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files.
 3. Create a per-task spec with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` to scaffold Requirements/Design/Implementation Planning/Execution.
-4. Follow the current phase checklist in `agents/workflows/default.workflow.md` and log reflections in the task spec (record approvals in the Decision & Work Log).
+4. Follow the current phase checklist in `agents/workflows/oneoff.workflow.md` and log reflections in the task spec (record approvals in the Decision & Work Log).
 
 ## Working a Task (Requirements → Design → Implementation Planning → Execution)
 - **Requirements**: author EARS-format user stories + acceptance criteria, list non-goals, constraints/risks, and invariants; record them in the task spec.

@@ -13,7 +13,7 @@ Before modifying code, load required context with `node agents/scripts/load-cont
 - Orchestrator: follow `agents/workflows/orchestrator.workflow.md` and the spec-first pipeline in `agents/memory-bank/spec-orchestration.design.md`.
 - One-off: ask whether the request is one-off vibe or one-off spec.
 - One-off vibe: no spec, small scope only; follow `agents/workflows/oneoff.workflow.md` and recommend switching modes if scope grows.
-- One-off spec: create a single spec using the required section schema, log approvals in the Decision & Work Log, then execute via `agents/workflows/default.workflow.md`.
+- One-off spec: create a single spec using the required section schema, log approvals in the Decision & Work Log, then execute via `agents/workflows/oneoff.workflow.md`.
 - Use user selection as the only threshold; do not infer mode from scope or complexity.
 - Reference `agents/workflows/spec-author.workflow.md` or `agents/workflows/implementer.workflow.md` when assigned a specific spec role.
 
@@ -48,4 +48,4 @@ One LLM executes work by following process markdowns in `agents/workflows/`.
 
 IT IS VERY IMPORTANT YOU STRICTLY FOLLOW AGENT WORKFLOWS
 
-Start with: `agents/workflows/default.workflow.md`
+Start with: `agents/workflows/oneoff.workflow.md`

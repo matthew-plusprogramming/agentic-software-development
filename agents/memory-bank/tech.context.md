@@ -15,12 +15,12 @@ Constraints
 
 Environment
 
-- Default entrypoint workflow: `agents/workflows/default.workflow.md`.
+- One-off entrypoint workflow: `agents/workflows/oneoff.workflow.md`.
 - Memory validation script: `npm run memory:validate`.
 
 Entrypoints
 
-- Start with `agents/workflows/default.workflow.md`.
+- Start with `agents/workflows/oneoff.workflow.md`.
 
 Where To Look First
 

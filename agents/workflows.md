@@ -2,7 +2,7 @@ Workflows
 
 It is very important you strictly follow the agent workflows.
 
-- Default workflow: `agents/workflows/default.workflow.md`
+- One-off workflow: `agents/workflows/oneoff.workflow.md`
 - Purpose: drive the four-phase loop (Requirements → Design → Implementation Planning → Execution) with explicit inputs/outputs and gates.
 
 Usage

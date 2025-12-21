@@ -28,7 +28,7 @@ Define a spec-first orchestration model that turns high-level requests into para
 - Spec Author (Subagent): produces a workstream spec and required contracts; does not implement code.
 - Implementer: turns approved specs into code/tests and verifies acceptance criteria.
 - One-off Vibe: ships a small change without specs; uses only the system context and keeps scope tight.
-- One-off Spec: uses a single spec (current default workflow style) and implements after approval; approvals are logged in Decision & Work Log.
+- One-off Spec: uses a single spec (one-off workflow style) and implements after approval; approvals are logged in Decision & Work Log.
 
 ## Mode Selection (User-Directed)
 
@@ -224,7 +224,7 @@ Proposed workflow additions:
 - `<agents/workflows/implementer.workflow.md>` for spec-driven execution.
 - `<agents/workflows/oneoff.workflow.md>` for one-off (vibe or spec) tasks.
 
-Existing default workflow remains the baseline for implementation once specs are approved.
+Existing one-off workflow remains the baseline for implementation once specs are approved.
 
 ## Artifacts and File Layout (Proposed)
 

@@ -22,7 +22,7 @@ Procedural vs Declarative
 Retrieval Policy
 
 - Identify task type: bug | feature | refactor | ops | etc.
-- Always include: `agents/workflows/default.workflow.md`, `agents/memory-bank/project.brief.md`, `agents/memory-bank/operating-model.md`, `agents/memory-bank/task-spec.guide.md`, and the current task spec or workstream spec (review the Decision & Work Log for approvals).
+- Always include: `agents/workflows/oneoff.workflow.md`, `agents/memory-bank/project.brief.md`, `agents/memory-bank/operating-model.md`, `agents/memory-bank/task-spec.guide.md`, and the current task spec or workstream spec (review the Decision & Work Log for approvals).
 - Gate optional files by substance: include `agents/memory-bank/tech.context.md` only when they contain substantive, non-placeholder content (more than headings/TBDs).
 - File discovery & content retrieval: rely on `node agents/scripts/list-files-recursively.mjs` to surface candidate paths, `node agents/scripts/smart-file-query.mjs` for scoped searches, and `node agents/scripts/read-files.mjs` (default numbered text output, `--json` when automation requires it) when you need ordered contents from multiple files; avoid falling back to generic shell defaults unless these scripts cannot satisfy the need.
 - Capture context in a single pass: the helper scripts now emit line numbers, so take notes the first time you load a file and only re-read when the file genuinely changes; repeated pulls violate workflow discipline and waste cycles.

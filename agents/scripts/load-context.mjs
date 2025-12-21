@@ -29,7 +29,7 @@ const ALWAYS_INCLUDE = [
   'agents/memory-bank.md',
   'agents/workflows.md',
   'agents/tools.md',
-  'agents/workflows/default.workflow.md',
+  'agents/workflows/oneoff.workflow.md',
   'agents/memory-bank/operating-model.md',
   'agents/memory-bank/task-spec.guide.md',
   'agents/memory-bank/project.brief.md',

@@ -77,7 +77,7 @@ Goals / Non-goals:
   Security (if applicable):
 - N/A.
   Additional considerations:
-- Keep default workflow intact for one-off spec path.
+- Keep one-off workflow intact for the one-off spec path.
   Testing:
 - `npm run agent:finalize` path validation; doc review.
   Open Questions:
