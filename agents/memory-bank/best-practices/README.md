@@ -12,3 +12,4 @@ last_reviewed: 2025-12-21
 Use this library for durable, reusable guidance that should be referenced from specs.
 
 - `typescript.md`: TypeScript usage guidelines.
+- `software-principles.md`: General software design principles.
