@@ -1,2 +1,2 @@
-# Ephemeral agent state (active context and scratch files)
+# Ephemeral agent state (task specs and scratch files)
 agents/ephemeral/*

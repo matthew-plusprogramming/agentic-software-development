@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-
-const ACTIVE_INDEX_PATH = 'agents/ephemeral/active.context.md';
 const TASK_SPECS_DIR = 'agents/ephemeral/task-specs';
 
 const USAGE = `Usage: node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [options]
 
-Create a new per-task spec (Requirements, Design, Implementation Planning, Execution)
-and refresh the active task index.
+Create a new per-task spec (Requirements, Design, Implementation Planning, Execution).
 
 Options
   --slug "<task-slug>"     Required slug used in the task spec filename
@@ -142,36 +139,12 @@ sequenceDiagram
 - Follow-ups:
 `;
 
-const buildActiveIndex = ({ date, specPath, title, slug }) => {
-  const lines = [];
-  lines.push('---');
-  lines.push(`last_reviewed: ${date}`);
-  lines.push('---');
-  lines.push('');
-  lines.push('# Active Task Index');
-  lines.push('');
-  lines.push('## Current Task Spec');
-  lines.push(`- Title: ${title}`);
-  lines.push(`- Slug: ${slug}`);
-  lines.push(`- Path: ${specPath}`);
-  lines.push('- Status: draft');
-  lines.push(`- Created: ${date}`);
-  lines.push('');
-  lines.push('## Task Spec Index');
-  lines.push(`- Current: ${specPath}`);
-  lines.push('- Archive: (add prior task specs here)');
-
-  lines.push('');
-  return lines.join('\n');
-};
-
 const main = async () => {
   const reviewDate = options.date ?? formatDate(new Date());
   const title = options.title ?? toTitleCase(options.slug);
   const taskSpecFile = `${reviewDate}-${options.slug}.md`;
   const taskSpecPath = `${TASK_SPECS_DIR}/${taskSpecFile}`;
 
-  const absoluteActiveIndexPath = resolve(process.cwd(), ACTIVE_INDEX_PATH);
   const absoluteTaskSpecPath = resolve(process.cwd(), taskSpecPath);
 
   const taskSpecContent = buildTaskSpecTemplate({
@@ -180,14 +153,6 @@ const main = async () => {
     date: reviewDate,
   });
 
-  const activeIndexContent = buildActiveIndex({
-    date: reviewDate,
-    specPath: taskSpecPath,
-    title,
-    slug: options.slug,
-  });
-
-  await mkdir(dirname(absoluteActiveIndexPath), { recursive: true });
   await mkdir(dirname(absoluteTaskSpecPath), { recursive: true });
 
   const taskSpecExists = await access(absoluteTaskSpecPath)
@@ -204,12 +169,13 @@ const main = async () => {
     console.log(`ℹ️  Task spec already exists at ${taskSpecPath}; left unchanged.`);
   }
 
-  await writeFile(absoluteActiveIndexPath, activeIndexContent, 'utf8');
-  console.log(`✅ Reset ${ACTIVE_INDEX_PATH} (last_reviewed: ${reviewDate})`);
+  console.log(
+    `ℹ️  Load context with: node agents/scripts/load-context.mjs --task ${taskSpecPath}`,
+  );
 };
 
 main().catch((error) => {
-  console.error('❌ Failed to reset the active task index.');
+  console.error('❌ Failed to create the task spec.');
   console.error(error);
   process.exit(1);
 });

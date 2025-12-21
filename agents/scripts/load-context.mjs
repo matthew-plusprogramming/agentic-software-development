@@ -10,6 +10,8 @@ each file with a section header so agents can review everything at once.
 Options
   -o, --include-optional   Include optional Memory Bank context files
   -l, --list               Only list the resolved file paths (no contents)
+  --task <path>            Include a specific task spec path
+  --task-spec <path>       Alias for --task
   -h, --help               Show this help message
 `;
 
@@ -24,7 +26,31 @@ const includeOptional =
   args.includes('-o') || args.includes('--include-optional');
 const listOnly = args.includes('-l') || args.includes('--list');
 
-const ACTIVE_INDEX_PATH = 'agents/ephemeral/active.context.md';
+const getOptionValue = (flag) => {
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === flag) {
+      const value = args[index + 1];
+      if (!value || value.startsWith('-')) {
+        console.error(`❌ Missing value for ${flag}`);
+        process.exit(1);
+      }
+      return value;
+    }
+    if (arg.startsWith(`${flag}=`)) {
+      const value = arg.slice(flag.length + 1);
+      if (!value) {
+        console.error(`❌ Missing value for ${flag}`);
+        process.exit(1);
+      }
+      return value;
+    }
+  }
+  return null;
+};
+
+const taskSpecPath =
+  getOptionValue('--task') ?? getOptionValue('--task-spec');
 const ALWAYS_INCLUDE = [
   'agents/memory-bank.md',
   'agents/workflows.md',
@@ -41,39 +67,15 @@ const optional = ['agents/memory-bank/tech.context.md'];
 
 const root = process.cwd();
 
-const resolveCurrentTaskSpecPath = () => {
-  const absoluteIndexPath = resolve(root, ACTIVE_INDEX_PATH);
-
-  if (!existsSync(absoluteIndexPath)) {
-    console.warn(
-      `⚠️  Missing file: ${ACTIVE_INDEX_PATH}. Run "node agents/scripts/reset-active-context.mjs" to create a task spec.`,
-    );
-    return null;
-  }
-
-  try {
-    const content = readFileSync(absoluteIndexPath, 'utf8');
-    const pathMatch = content.match(/^- Path:\s*(.+)$/m);
-    const currentMatch = content.match(/^- Current:\s*(.+)$/m);
-    const candidate = pathMatch?.[1] ?? currentMatch?.[1];
-    if (!candidate) {
-      console.warn(
-        `⚠️  Could not resolve current task spec from ${ACTIVE_INDEX_PATH}.`,
-      );
-      return null;
-    }
-    return candidate.trim();
-  } catch (error) {
-    console.warn(
-      `⚠️  Failed to read ${ACTIVE_INDEX_PATH}: ${error.message}`,
-    );
-    return null;
-  }
-};
-
 const collectPaths = () => {
-  const currentTaskSpec = resolveCurrentTaskSpecPath();
-  const base = currentTaskSpec ? [...ALWAYS_INCLUDE, currentTaskSpec] : ALWAYS_INCLUDE;
+  const base = [...ALWAYS_INCLUDE];
+  if (taskSpecPath) {
+    base.push(taskSpecPath);
+  } else {
+    console.warn(
+      '⚠️  No task spec provided. Use --task <path> to include the current task spec.',
+    );
+  }
   return includeOptional ? [...base, ...optional] : base;
 };
 

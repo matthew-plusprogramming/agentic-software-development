@@ -76,7 +76,7 @@ sequenceDiagram
 - Update: `agents/workflows/implementer.workflow.md` stub into a spec-driven implementation workflow.
 - Update: `agents/workflows/oneoff.workflow.md` to route to the split spec/vibe workflows.
 - Update: `agents/workflows/templates/pattern.workflow.template.md` to align with spec-first and remove `agents/ephemeral` references.
-- Update: `agents/memory-bank/operating-model.md` to reflect spec-first phases and remove active context guidance.
+- Update: `agents/memory-bank/operating-model.md` to reflect spec-first phases and remove deprecated context index guidance.
 
 ## Security
 

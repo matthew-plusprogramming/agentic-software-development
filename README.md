@@ -14,7 +14,7 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 
 ## Start Here
 1. Read [`AGENTS.md`](AGENTS.md) for the complete repo-native agent obligations and tooling overview.
-2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files.
+2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files; when a task spec exists, include it with `--task agents/ephemeral/task-specs/<YYYY-MM-DD>-<slug>.md`.
 3. Create a per-task spec with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` to scaffold Requirements/Design/Implementation Planning/Execution.
 4. Choose a mode: orchestrator vs one-off (ask the user if it is not explicit).
 5. Orchestrator: follow `agents/workflows/orchestrator.workflow.md` (or `agents/workflows/spec-author.workflow.md` / `agents/workflows/implementer.workflow.md` when assigned a role).
@@ -39,9 +39,9 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 - `AGENTS.md`: Quick orientation for agents operating in this template.
 
 ## Commands & Scripts
-- `node agents/scripts/load-context.mjs`: Print the required Memory Bank/workflow files for the current task.
+- `node agents/scripts/load-context.mjs [--task <path>]`: Print the required Memory Bank/workflow files for the current task (include the current task spec when available).
 - `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers.
-- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec and refresh the active task index.
+- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec.
 - `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."`: Deprecated; prints a reflection entry for manual copy into the task spec.
 - `npm run memory:validate`: Ensure referenced paths in Memory Bank files exist.
 - `npm run phase:check`: Run the lint placeholder (`npm run lint:fix`) and repo quality checks (`node agents/scripts/check-code-quality.mjs`).

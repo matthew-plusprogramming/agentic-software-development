@@ -100,7 +100,7 @@ sequenceDiagram
 - Decision: User selection is the only threshold for orchestrator vs one-off.
 - Approval: Pending confirmation once guidance updates are reviewed.
 - Work Log: Updated AGENTS and Memory Bank guidance to reflect mode selection, workflow references, and Decision & Work Log approvals.
-- Work Log: Aligned workflow and guidance docs to log reflections in task specs and avoid active context references.
+- Work Log: Aligned workflow and guidance docs to log reflections in task specs and avoid deprecated context index references.
 - Work Log: Renamed the default workflow to `agents/workflows/oneoff.workflow.md` for one-off spec guidance.
 - Work Log: Added Task List section aligned to Requirements and Design.
 - Work Log: Split one-off workflow into overview + spec/vibe files and updated references.

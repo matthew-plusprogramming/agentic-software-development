@@ -87,13 +87,7 @@ sequenceDiagram
 - Keep: `agents/specs/spec-first-orchestration/workstreams/ws-2-workflow-library.md` as the current WS-2 spec (update as needed).
 - Keep: `agents/specs/spec-first-orchestration/workstreams/ws-3-spec-schema.md` as the current WS-3 spec (update as needed).
 - Keep: `agents/specs/spec-first-orchestration/workstreams/ws-4-tooling-gates.md` as the current WS-4 spec (update as needed).
-- Delete: `agents/ephemeral/active.context.md` because ephemeral context is replaced by spec-based logs.
-- Delete: `agents/ephemeral/task-specs/2025-11-26-agent-instruction-rewrite.md` after migration to durable specs.
-- Delete: `agents/ephemeral/task-specs/2025-12-17-remove-memory-stamp.md` after migration to durable specs.
-- Delete: `agents/ephemeral/task-specs/2025-12-20-pinnacle-spec-orchestrator-design.md` after migration to durable specs.
-- Delete: `agents/ephemeral/task-specs/2025-12-20-spec-first-workstream-specs.md` after migration to durable specs.
-- Delete: `agents/ephemeral/task-specs/2025-12-20-spec-guide-sequence-diagram.md` after migration to durable specs.
-- Delete: `agents/ephemeral/task-specs/2025-12-20-spec-docs-audit.md` after migration to durable specs.
+- Remove: the task context index file now that task specs are passed explicitly to context loading.
 
 ## Security
 
@@ -129,3 +123,4 @@ sequenceDiagram
 - Approval: Pending template review.
 - Work Log: Added Task List as a required WorkstreamSpec section derived from Requirements and Design.
 - Work Log: Added ProblemBrief/MasterSpec templates, schema docs/files, best-practices library, and contract registry guidance.
+- Work Log: Removed deprecated task specs and removed the task context index file now that task specs are passed explicitly.

@@ -40,3 +40,4 @@ last_reviewed: 2025-11-26
 - Keep traceability: link each acceptance criterion to tests or evidence in Execution.
 - Update the spec incrementally as decisions change; avoid drift between plan and reality.
 - After each phase, capture a brief reflection in the task spec and log approvals in the Decision & Work Log.
+- When loading context, include the task spec explicitly with `node agents/scripts/load-context.mjs --task agents/ephemeral/task-specs/<YYYY-MM-DD>-<slug>.md`.

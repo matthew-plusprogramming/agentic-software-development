@@ -30,6 +30,5 @@ last_reviewed: 2025-11-26
 ## Artifacts & Tools
 
 - Task Specs: created via `reset-active-context.mjs`; named `<YYYY-MM-DD>-<slug>.md`; include all four phases plus execution log and evidence.
-- Active Task Index: maintained by `reset-active-context.mjs` for tracking the current Task Spec.
-- Retrieval: use `agents/scripts/load-context.mjs` to pull required context; follow `agents/memory-bank.md#retrieval-policy` for discovery discipline.
+- Retrieval: use `agents/scripts/load-context.mjs --task <path>` to pull required context and include the current task spec; follow `agents/memory-bank.md#retrieval-policy` for discovery discipline.
 - Validation: `npm run agent:finalize` runs formatting, validation, and quality checks before completion.

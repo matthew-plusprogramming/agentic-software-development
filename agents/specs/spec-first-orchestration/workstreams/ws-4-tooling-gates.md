@@ -101,7 +101,7 @@ sequenceDiagram
 
 - Decision: Orchestrator must attach gate report summary to the Decision & Work Log.
 - Approval: Pending tooling design review.
-- Work Log: Deprecated append-memory-entry, trimmed the active task index to metadata only, and updated load-context to include the current task spec.
+- Work Log: Deprecated append-memory-entry, removed the per-task context index file, and updated load-context to include explicit task spec paths.
 - Work Log: Recorded `npm run agent:finalize` as the default completion gate for completed tasks.
 - Work Log: Added Task List section aligned to Requirements and Design.
 - Work Log: Implemented spec-validate/spec-merge tooling, added spec scripts, and documented spec tooling usage.

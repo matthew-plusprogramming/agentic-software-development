@@ -6,12 +6,12 @@ Prefer the purpose-built discovery scripts (`list-files-recursively.mjs`, `smart
 
 ## Context & Memory Management
 
-- `node agents/scripts/load-context.mjs [--include-optional] [--list]`
-  Prints required Memory Bank + workflow files for the current task with numbered lines to encourage single-pass note taking. Add `--include-optional` to pull in supplemental context and `--list` to show paths without content.
+- `node agents/scripts/load-context.mjs [--include-optional] [--list] [--task <path>]`
+  Prints required Memory Bank + workflow files for the current task with numbered lines to encourage single-pass note taking. Add `--include-optional` to pull in supplemental context, `--list` to show paths without content, and `--task` to include the current task spec explicitly.
 - `node agents/scripts/append-memory-entry.mjs --requirements "<text>" [--design "<text>"] [--implementation "<text>"] [--execution "<text>"] [--dry-run]`
   Deprecated; prints a formatted reflection entry for manual copy into the task spec (no file writes).
 - `node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [--title "<text>"] [--date "<YYYY-MM-DD>"]`
-  Creates a per-task spec and refreshes the active task index (date defaults to today UTC).
+  Creates a per-task spec (date defaults to today UTC).
 
 ## Spec Tooling
 

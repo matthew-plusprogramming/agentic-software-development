@@ -1,6 +1,6 @@
 ## 🔧 Start Here (for AI agents)
 
-Before modifying code, load required context with `node agents/scripts/load-context.mjs`, then work inside the repo-native agent system under `agents/`.
+Before modifying code, load required context with `node agents/scripts/load-context.mjs`, then work inside the repo-native agent system under `agents/`. When a task spec exists, include it with `node agents/scripts/load-context.mjs --task agents/ephemeral/task-specs/<YYYY-MM-DD>-<slug>.md`.
 
 - Memory Bank overview: `agents/memory-bank.md`
 - Workflows overview: `agents/workflows.md`
@@ -37,7 +37,7 @@ Update Requirements (per task)
 
 Convenience helpers
 
-- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]` creates a new per-task spec and refreshes the active task index.
+- `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]` creates a new per-task spec.
 - `node agents/scripts/append-memory-entry.mjs --requirements "..." --design "..." --implementation "..." --execution "..."` is deprecated; it prints a reflection entry for manual copy into the task spec.
 
 ## 🧭 Workflow Process List
