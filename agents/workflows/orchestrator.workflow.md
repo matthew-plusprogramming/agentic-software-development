@@ -11,6 +11,7 @@ Global Prompts
 
 - Follow `agents/memory-bank.md#retrieval-policy` for discovery tooling, numbered output expectations, and single-pass context discipline.
 - Use the spec templates in `agents/specs/templates/` and the contract registry at `agents/contracts/registry.yaml`.
+- Use `node agents/scripts/manage-worktrees.mjs ensure` to create per-workstream worktrees under `.worktrees/` once workstreams are defined.
 - Record approvals and gating decisions in the Decision & Work Log.
 - Use `node agents/scripts/spec-validate.mjs` and `node agents/scripts/spec-merge.mjs` to enforce gates.
 
@@ -43,6 +44,7 @@ Phase: implementation-planning
 - Goal: Plan spec production and gate checks.
 - Checklist:
   - Provide spec authors with `agents/specs/templates/workstream-spec.template.md`.
+  - Run `node agents/scripts/manage-worktrees.mjs ensure --workstreams <ws-ids>` to provision per-workstream worktrees.
   - Define required validation cadence (`spec-validate` before merge).
   - Set spec-complete gates and required evidence.
   - Confirm timeline and communication checkpoints.

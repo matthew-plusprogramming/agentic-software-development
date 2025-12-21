@@ -242,6 +242,7 @@ One-off spec workflow remains the baseline for implementation once specs are app
 
 - `node <agents/scripts/spec-validate.mjs>` for schema checks.
 - `node <agents/scripts/spec-merge.mjs>` for MasterSpec creation and conflict detection.
+- `node <agents/scripts/manage-worktrees.mjs ensure --spec <master-spec>>` to provision per-workstream worktrees for parallel orchestration.
 - `npm run spec:finalize` to run spec validation + memory checks.
 
 ## Risks and Mitigations

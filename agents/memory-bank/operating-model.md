@@ -31,5 +31,5 @@ last_reviewed: 2025-11-26
 
 - Task Specs: created via `reset-active-context.mjs`; named `<YYYY-MM-DD>-<slug>.md`; include all four phases plus execution log and evidence.
 - Retrieval: use `agents/scripts/load-context.mjs --task <path>` to pull required context and include the current task spec; follow `agents/memory-bank.md#retrieval-policy` for discovery discipline.
-- Worktrees: implementers create per-workstream git worktrees under `.worktrees/` using `node agents/scripts/create-worktree.mjs --name <workstream-id>` before execution.
+- Worktrees: orchestrators use `node agents/scripts/manage-worktrees.mjs ensure` to manage per-workstream worktrees; implementers create individual worktrees with `node agents/scripts/create-worktree.mjs --name <workstream-id>` before execution.
 - Validation: `npm run agent:finalize` runs formatting, validation, and quality checks before completion.
