@@ -1,2 +1,3 @@
 # Ephemeral agent state (task specs and scratch files)
 agents/ephemeral/*
+.worktrees/

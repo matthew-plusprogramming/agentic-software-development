@@ -29,6 +29,11 @@ Prefer the purpose-built discovery scripts (`list-files-recursively.mjs`, `smart
 - `node agents/scripts/read-files.mjs --files "<path[,path...]>" [--file-list ...] [--encoding ...] [--maxFileSizeKB ...] [--json]`
   Reads multiple repo-relative files, applying size/binary guards, and prints numbered text blocks by default so you can cite `path:line` without re-reading. Use `--json` when automation requires the legacy `{ files: [{ path, content }] }` payload.
 
+## Git Worktrees
+
+- `node agents/scripts/create-worktree.mjs --name "<worktree-name>" [--branch "<branch-name>"] [--base "<git-ref>"]`
+  Creates a git worktree under `.worktrees/`, defaulting to the `worktree/<name>` branch when none is provided.
+
 ## Reporting & Diff Utilities
 
 - `node agents/scripts/list-files-recursively.mjs --root <path> --pattern <pattern> [--types ...] [--regex] [--case-sensitive]`

@@ -11,6 +11,7 @@ Global Prompts
 
 - Follow `agents/memory-bank.md#retrieval-policy` for discovery tooling and single-pass context discipline.
 - Require an approved MasterSpec and gate report before implementation.
+- Create or switch to a per-workstream git worktree under `.worktrees/` using `node agents/scripts/create-worktree.mjs --name <workstream-id>` before making changes.
 - Record approvals and key decisions in the Decision & Work Log.
 - Use `npm run agent:finalize` before concluding.
 
