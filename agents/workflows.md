@@ -2,14 +2,17 @@ Workflows
 
 It is very important you strictly follow the agent workflows.
 
+- Orchestrator workflow: `agents/workflows/orchestrator.workflow.md`
+- Spec author workflow: `agents/workflows/spec-author.workflow.md`
+- Implementer workflow: `agents/workflows/implementer.workflow.md`
 - One-off overview: `agents/workflows/oneoff.workflow.md`
 - One-off spec workflow: `agents/workflows/oneoff-spec.workflow.md`
 - One-off vibe workflow: `agents/workflows/oneoff-vibe.workflow.md`
-- Purpose: drive the one-off flow; spec follows the full four-phase loop with gates, vibe stays lightweight.
+- Purpose: define the spec-first run-loop and the one-off paths; spec workflows follow the four-phase loop with gates.
 
 Usage
 
-- Open the workflow file and start at the current phase.
+- Select the workflow based on the assigned role (or one-off mode), then start at the current phase.
 - Follow the checklist, produce outputs, and update the phase state in the file.
 - After each phase, log a short reflection in the task spec and record approvals in the Decision & Work Log.
 - Reference `agents/tools.md` for script helpers that support each phase.

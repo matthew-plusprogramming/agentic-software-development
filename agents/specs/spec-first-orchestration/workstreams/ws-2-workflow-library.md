@@ -112,3 +112,4 @@ sequenceDiagram
 - Work Log: Recorded default completion gate (`npm run agent:finalize`) and the rename to `agents/workflows/oneoff.workflow.md`.
 - Work Log: Added Task List section aligned to Requirements and Design.
 - Work Log: Split one-off workflow into overview + spec/vibe files and updated references.
+- Work Log: Drafted orchestrator/spec-author/implementer workflows and aligned workflow templates/overview with spec-first usage.
