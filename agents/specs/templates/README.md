@@ -1,3 +1,4 @@
-# Spec Templates (Placeholder)
+# Spec Templates
 
-This directory will hold ProblemBrief, WorkstreamSpec, and MasterSpec templates.
+- `workstream-spec.template.md`: Workstream spec template (includes Task List).
+- ProblemBrief and MasterSpec templates: pending.

@@ -79,6 +79,15 @@ sequenceDiagram
 - Keep tooling deterministic for reviewability and consistent diffs.
 - Provide clear error messages for spec authors.
 
+## Task List
+
+- Define `spec-validate` CLI inputs, required section checks, and registry validation.
+- Define `spec-merge` outputs, conflict detection, and cycle reporting.
+- Document gate report output and how it attaches to the Decision & Work Log.
+- Enforce safe output paths under `agents/specs/`.
+- Add validation fixtures for success/error cases.
+- Validate updates with `npm run agent:finalize`.
+
 ## Testing
 
 - Fixture inputs for valid/invalid specs.
@@ -94,3 +103,4 @@ sequenceDiagram
 - Approval: Pending tooling design review.
 - Work Log: Deprecated append-memory-entry, trimmed the active task index to metadata only, and updated load-context to include the current task spec.
 - Work Log: Recorded `npm run agent:finalize` as the default completion gate for completed tasks.
+- Work Log: Added Task List section aligned to Requirements and Design.

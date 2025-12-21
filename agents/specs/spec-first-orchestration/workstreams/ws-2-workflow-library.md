@@ -20,7 +20,7 @@ The workflow library is the operational backbone for spec-first orchestration. E
 - Goals:
   - Define orchestrator, spec-author, implementer, and one-off workflows with clear phase gates.
   - Encode the spec-first run-loop and handoffs across workflows.
-  - Preserve the default workflow for one-off spec execution.
+  - Preserve the renamed one-off workflow (formerly `default.workflow.md`) for one-off spec execution.
 - Non-goals:
   - Implement automation beyond documented steps.
   - Replace the existing default workflow for non-orchestrator tasks.
@@ -84,8 +84,17 @@ sequenceDiagram
 
 ## Additional considerations
 
-- Keep the default workflow intact and reference it explicitly for one-off spec execution.
+- Preserve the one-off workflow content during the rename and reference it explicitly for one-off spec execution.
 - Ensure workflows call out approval logging requirements.
+
+## Task List
+
+- Draft orchestrator workflow with decomposition, spec assignment, merge, and spec-complete gates.
+- Draft spec-author workflow with required sections and Decision & Work Log updates.
+- Draft implementer workflow gated on approved MasterSpec.
+- Rename `agents/workflows/default.workflow.md` to the one-off workflow (optionally split vibe/spec) and update references.
+- Update workflow templates and usage docs to reflect the new workflow layout.
+- Validate updates with `npm run agent:finalize`.
 
 ## Testing
 
@@ -101,3 +110,4 @@ sequenceDiagram
 - Decision: Orchestrator must record spec-complete approval before implementation begins.
 - Approval: Pending workflow review.
 - Work Log: Recorded default completion gate (`npm run agent:finalize`) and the plan to rename default.workflow.md to the one-off workflow file.
+- Work Log: Added Task List section aligned to Requirements and Design.

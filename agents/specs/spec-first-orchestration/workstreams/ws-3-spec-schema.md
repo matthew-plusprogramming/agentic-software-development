@@ -30,6 +30,7 @@ Spec authors need consistent schemas and templates to produce machine-checkable 
 - The WorkstreamSpec template shall include all required sections listed in the spec-orchestration design.
 - The WorkstreamSpec template shall include a Sequence Diagram(s) section with a Mermaid diagram for the primary flow (aligned to `agents/memory-bank/task-spec.guide.md`).
 - The Decision & Work Log section shall be mandatory and include user approvals.
+- The WorkstreamSpec template shall include a Task List derived from Requirements and Design.
 - The MasterSpec template shall list workstream ids, contracts, and gates.
 - The contract registry shall include id, type, path, owner, and version fields.
 - One-off spec usage shall reuse the same section schema as workstream specs.
@@ -74,6 +75,7 @@ sequenceDiagram
 
 - Update: `agents/memory-bank/task-spec.guide.md` to rewrite the spec guide for the new system and remove `agents/ephemeral` references.
 - Update: `agents/memory-bank/spec-orchestration.design.md` to reflect the new spec-first file layout and Decision & Work Log usage.
+- Update: `agents/memory-bank/spec-orchestration.design.md` required section list to include Task List guidance.
 - Update: `agents/memory-bank/spec-first-orchestration-master-spec.md` to align with updated spec layout and contract registry references.
 - Update: `agents/memory-bank.md` retrieval policy to include best-practices docs when relevant.
 - Update: `agents/specs/README.md` to document the new spec-first directory layout and durable context storage.
@@ -103,6 +105,15 @@ sequenceDiagram
 - Provide short guidance text in templates to minimize ambiguity.
 - Keep best-practices docs focused on actionable guidance and avoid duplicating spec content.
 
+## Task List
+
+- Create WorkstreamSpec template with required sections, Task List, Decision & Work Log, and best-practices references.
+- Create ProblemBrief and MasterSpec templates aligned to the spec-first schema.
+- Define the contract registry schema and document registry usage.
+- Add the best-practices index and a TypeScript starter doc.
+- Update spec-orchestration design required section list to include Task List.
+- Validate updates with `npm run agent:finalize`.
+
 ## Testing
 
 - Schema validation fixtures for valid/invalid specs.
@@ -116,3 +127,4 @@ sequenceDiagram
 
 - Decision: One-off spec uses the same section schema as workstream specs.
 - Approval: Pending template review.
+- Work Log: Added Task List as a required WorkstreamSpec section derived from Requirements and Design.

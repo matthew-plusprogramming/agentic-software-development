@@ -139,6 +139,7 @@ contracts:
 - Interfaces & Data Model
 - Security (if applicable)
 - Additional considerations
+- Task List (derived from Requirements and Design)
 - Testing
 - Open Questions
 - Decision & Work Log (required for multi-session specs; record user approvals here)

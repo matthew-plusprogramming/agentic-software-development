@@ -78,6 +78,14 @@ sequenceDiagram
 - Keep guidance concise and avoid duplicating workflow content.
 - Ensure all references point to the canonical workflow files.
 
+## Task List
+
+- Draft the mode-selection decision tree and one-off vibe/spec guidance in top-level docs.
+- Reference the renamed one-off workflow and relevant orchestrator/spec-author/implementer workflows.
+- Update Memory Bank guidance to remove ephemeral references and align approvals to the Decision & Work Log.
+- Update testing guidance to reference spec-based acceptance criteria and evidence.
+- Validate updates with `npm run agent:finalize`.
+
 ## Testing
 
 - `npm run agent:finalize`
@@ -94,3 +102,4 @@ sequenceDiagram
 - Work Log: Updated AGENTS and Memory Bank guidance to reflect mode selection, workflow references, and Decision & Work Log approvals.
 - Work Log: Aligned workflow and guidance docs to log reflections in task specs and avoid active context references.
 - Work Log: Noted one-off workflow rename from `default.workflow.md` for one-off spec guidance.
+- Work Log: Added Task List section aligned to Requirements and Design.
