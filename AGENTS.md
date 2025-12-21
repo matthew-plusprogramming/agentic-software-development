@@ -11,6 +11,8 @@ Before modifying code, load required context with `node agents/scripts/load-cont
 
 - If the user does not specify a mode, ask them to choose orchestrator or one-off before proceeding.
 - Orchestrator: follow `agents/workflows/orchestrator.workflow.md` and the spec-first pipeline in `agents/memory-bank/spec-orchestration.design.md`.
+- Spec author: follow `agents/workflows/spec-author.workflow.md` when assigned a workstream spec.
+- Implementer: follow `agents/workflows/implementer.workflow.md` when executing an approved MasterSpec.
 - One-off: ask whether the request is one-off vibe or one-off spec; use `agents/workflows/oneoff.workflow.md` for the overview.
 - One-off vibe: no spec, small scope only; follow `agents/workflows/oneoff-vibe.workflow.md` and recommend switching modes if scope grows.
 - One-off spec: create a single spec using the required section schema, log approvals in the Decision & Work Log, then execute via `agents/workflows/oneoff-spec.workflow.md`.
