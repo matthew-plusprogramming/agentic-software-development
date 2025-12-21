@@ -15,4 +15,4 @@ Related assets:
 - Schemas: `agents/specs/schema/`
 - Contract registry: `agents/contracts/registry.yaml`
 
-Note: One-off task specs still live under `agents/ephemeral/task-specs/` per the operating model until a full migration is completed.
+Note: One-off task specs still live under `agents/specs/task-specs/` per the operating model until a full migration is completed.

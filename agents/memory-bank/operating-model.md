@@ -7,7 +7,7 @@ last_reviewed: 2025-11-26
 ## Overview
 
 - Default phases: Requirements → Design → Implementation Planning → Execution.
-- Every task has a Task Spec under `agents/ephemeral/task-specs/` that holds these phases; it is created with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]`.
+- Every task has a Task Spec under `agents/specs/task-specs/` that holds these phases; it is created with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]`.
 - Reflections are recorded in the task spec after each phase, with approvals logged in the Decision & Work Log.
 - Canonical updates live in `agents/memory-bank/**`; validate via `npm run memory:validate` (or `npm run agent:finalize`) after stable changes.
 

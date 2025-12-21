@@ -1,6 +1,6 @@
 ## 🔧 Start Here (for AI agents)
 
-Before modifying code, load required context with `node agents/scripts/load-context.mjs`, then work inside the repo-native agent system under `agents/`. When a task spec exists, include it with `node agents/scripts/load-context.mjs --task agents/ephemeral/task-specs/<YYYY-MM-DD>-<slug>.md`.
+Before modifying code, load required context with `node agents/scripts/load-context.mjs`, then work inside the repo-native agent system under `agents/`. When a task spec exists, include it with `node agents/scripts/load-context.mjs --task agents/specs/task-specs/<YYYY-MM-DD>-<slug>.md`.
 
 - Memory Bank overview: `agents/memory-bank.md`
 - Workflows overview: `agents/workflows.md`

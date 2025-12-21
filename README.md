@@ -3,24 +3,28 @@
 Build software with AI agents using a durable Memory Bank, explicit multi-phase Workflows, and per-task specs. This template keeps context close to code, makes execution visible, and keeps docs and diffs PR-friendly.
 
 **What You Get**
+
 - Memory Bank: tiered, structured markdown under `agents/memory-bank/**` with path validation for referenced files.
 - Workflows: diff-able `agents/workflows/**` guides for the Requirements → Design → Implementation Planning → Execution loop plus supporting prompts.
-- Task specs: per-task files under `agents/ephemeral/task-specs/` that hold requirements (EARS), design notes, implementation plan, and execution log.
+- Task specs: per-task files under `agents/specs/task-specs/` that hold requirements (EARS), design notes, implementation plan, and execution log.
 - Agent scripts: repo-native helpers under `agents/scripts/**` for loading context, searching files, validating canonicals, and running quality checks.
 
 **Who This Helps**
+
 - Individuals or teams who want agents (and humans) to work predictably.
 - Folks who value durable context, visible plans, and change validation.
 
 ## Start Here
+
 1. Read [`AGENTS.md`](AGENTS.md) for the complete repo-native agent obligations and tooling overview.
-2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files; when a task spec exists, include it with `--task agents/ephemeral/task-specs/<YYYY-MM-DD>-<slug>.md`.
+2. Kick off each task with `node agents/scripts/load-context.mjs` to print the required Memory Bank + workflow files; when a task spec exists, include it with `--task agents/specs/task-specs/<YYYY-MM-DD>-<slug>.md`.
 3. Create a per-task spec with `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."]` to scaffold Requirements/Design/Implementation Planning/Execution.
 4. Choose a mode: orchestrator vs one-off (ask the user if it is not explicit).
 5. Orchestrator: follow `agents/workflows/orchestrator.workflow.md` (or `agents/workflows/spec-author.workflow.md` / `agents/workflows/implementer.workflow.md` when assigned a role).
 6. One-off: follow the decision guide in `agents/workflows/oneoff.workflow.md`, then use `agents/workflows/oneoff-spec.workflow.md` or `agents/workflows/oneoff-vibe.workflow.md` based on mode and log reflections in the task spec (record approvals in the Decision & Work Log).
 
 ## Working a Task (Requirements → Design → Implementation Planning → Execution)
+
 - **Requirements**: author EARS-format user stories + acceptance criteria, list non-goals, constraints/risks, and invariants; record them in the task spec.
 - **Design**: capture architecture notes, Mermaid sequence diagrams for primary flows, interface contracts, and edge/failure behaviors in the task spec.
 - **Implementation Planning**: break down work into discrete tasks with outcomes/dependencies, map tests to EARS criteria, and ensure traceability.
@@ -29,16 +33,18 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 - When Memory Bank canonicals change, run `npm run memory:validate` (or `npm run agent:finalize`) before shipping.
 
 ## Repository Layout
+
 - `agents/memory-bank.md`: Memory Bank overview and retrieval policy.
 - `agents/memory-bank/operating-model.md`: Canonical description of the four-phase loop and expectations.
 - `agents/memory-bank/task-spec.guide.md`: Guidance and examples for per-task specs.
 - `agents/memory-bank/**`: Canonical context (project, product, tech, decisions, patterns, progress, active reflections).
 - `agents/workflows/**`: Default and pattern-specific workflows that drive the phase gates.
 - `agents/scripts/**`: Context loaders, search utilities, validation helpers, and quality checks (`constants.js` centralizes path settings).
-- `agents/ephemeral/task-specs/**`: Per-task specs (Requirements/Design/Implementation Planning/Execution) created per task.
+- `agents/specs/task-specs/**`: Per-task specs (Requirements/Design/Implementation Planning/Execution) created per task.
 - `AGENTS.md`: Quick orientation for agents operating in this template.
 
 ## Commands & Scripts
+
 - `node agents/scripts/load-context.mjs [--task <path>]`: Print the required Memory Bank/workflow files for the current task (include the current task spec when available).
 - `node agents/scripts/list-files-recursively.mjs` and `node agents/scripts/smart-file-query.mjs`: Preferred file discovery helpers.
 - `node agents/scripts/reset-active-context.mjs --slug <task-slug> [--title "..."] [--date YYYY-MM-DD]`: Create a per-task spec.
@@ -48,6 +54,7 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 - `npm run agent:finalize`: Format markdown, validate the Memory Bank, and run the phase check in one pass.
 
 ## Adopt This Template
+
 1. Copy `agents/` and `AGENTS.md` into your repository root (or fork this template).
 2. Update `agents/scripts/constants.js`:
    - `PATH_PREFIXES`: directories to validate (e.g., `src/`, `packages/`).
@@ -56,5 +63,6 @@ Build software with AI agents using a durable Memory Bank, explicit multi-phase 
 5. Gate PRs by running `npm run agent:finalize` locally or in CI.
 
 ## Tips & Troubleshooting
+
 - Validation failures: update incorrect paths in Memory Bank files or adjust `PATH_PREFIXES`/`ROOT_BASENAMES` in `agents/scripts/constants.js`.
 - Git and tooling: workflows are tool-agnostic—use your preferred git client or MCP integration while keeping the Memory Bank and reflections current.

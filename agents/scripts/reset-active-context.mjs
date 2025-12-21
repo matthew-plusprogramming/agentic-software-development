@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { access, mkdir, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
-const TASK_SPECS_DIR = 'agents/ephemeral/task-specs';
+import { access, mkdir, writeFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+const TASK_SPECS_DIR = "agents/specs/task-specs";
 
 const USAGE = `Usage: node agents/scripts/reset-active-context.mjs --slug "<task-slug>" [options]
 
@@ -16,7 +16,7 @@ Options
 
 const args = process.argv.slice(2);
 
-if (args.includes('-h') || args.includes('--help')) {
+if (args.includes("-h") || args.includes("--help")) {
   console.log(USAGE.trimEnd());
   process.exit(0);
 }
@@ -30,24 +30,24 @@ const options = {
 for (let index = 0; index < args.length; index += 1) {
   const arg = args[index];
 
-  if (!arg.startsWith('--')) {
+  if (!arg.startsWith("--")) {
     console.error(`❌ Unexpected argument: ${arg}`);
     process.exit(1);
   }
 
-  const [flag, inlineValue] = arg.split('=');
+  const [flag, inlineValue] = arg.split("=");
   const nextValue = args[index + 1];
   const value = inlineValue ?? nextValue;
 
   switch (flag) {
-    case '--date': {
+    case "--date": {
       if (!value) {
-        console.error('❌ Missing value for --date');
+        console.error("❌ Missing value for --date");
         process.exit(1);
       }
 
       if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
-        console.error('❌ --date must follow YYYY-MM-DD format');
+        console.error("❌ --date must follow YYYY-MM-DD format");
         process.exit(1);
       }
 
@@ -55,14 +55,16 @@ for (let index = 0; index < args.length; index += 1) {
       if (inlineValue === undefined) index += 1;
       break;
     }
-    case '--slug': {
+    case "--slug": {
       if (!value) {
-        console.error('❌ Missing value for --slug');
+        console.error("❌ Missing value for --slug");
         process.exit(1);
       }
 
       if (!/^[a-z0-9-]+$/.test(value)) {
-        console.error('❌ --slug must use lowercase letters, numbers, or dashes only');
+        console.error(
+          "❌ --slug must use lowercase letters, numbers, or dashes only",
+        );
         process.exit(1);
       }
 
@@ -70,9 +72,9 @@ for (let index = 0; index < args.length; index += 1) {
       if (inlineValue === undefined) index += 1;
       break;
     }
-    case '--title': {
+    case "--title": {
       if (!value) {
-        console.error('❌ Missing value for --title');
+        console.error("❌ Missing value for --title");
         process.exit(1);
       }
 
@@ -87,19 +89,19 @@ for (let index = 0; index < args.length; index += 1) {
 }
 
 if (!options.slug) {
-  console.error('❌ --slug is required');
+  console.error("❌ --slug is required");
   process.exit(1);
 }
 
 const formatDate = (inputDate) =>
-  new Intl.DateTimeFormat('en-CA', { timeZone: 'UTC' }).format(inputDate);
+  new Intl.DateTimeFormat("en-CA", { timeZone: "UTC" }).format(inputDate);
 
 const toTitleCase = (value) =>
   value
-    .split('-')
+    .split("-")
     .filter(Boolean)
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
+    .join(" ");
 
 const buildTaskSpecTemplate = ({ title, slug, date }) => `---
 task: ${title}
@@ -158,15 +160,17 @@ const main = async () => {
   const taskSpecExists = await access(absoluteTaskSpecPath)
     .then(() => true)
     .catch((error) => {
-      if (error.code === 'ENOENT') return false;
+      if (error.code === "ENOENT") return false;
       throw error;
     });
 
   if (!taskSpecExists) {
-    await writeFile(absoluteTaskSpecPath, taskSpecContent, 'utf8');
+    await writeFile(absoluteTaskSpecPath, taskSpecContent, "utf8");
     console.log(`✅ Created task spec at ${taskSpecPath}`);
   } else {
-    console.log(`ℹ️  Task spec already exists at ${taskSpecPath}; left unchanged.`);
+    console.log(
+      `ℹ️  Task spec already exists at ${taskSpecPath}; left unchanged.`,
+    );
   }
 
   console.log(
@@ -175,7 +179,7 @@ const main = async () => {
 };
 
 main().catch((error) => {
-  console.error('❌ Failed to create the task spec.');
+  console.error("❌ Failed to create the task spec.");
   console.error(error);
   process.exit(1);
 });
