@@ -6,6 +6,7 @@ scope: <short scope statement>
 dependencies: []
 contracts: []
 status: draft
+implementation_status: not_started
 ---
 
 # <Workstream Title>
@@ -67,6 +68,11 @@ sequenceDiagram
 ## Open Questions
 
 - ...
+
+## Workstream Reflection
+
+- Capture problems encountered and preventable errors (lint failures, deprecated code, missing tests).
+- Note root cause and remediation ideas for future runs.
 
 ## Decision & Work Log
 
